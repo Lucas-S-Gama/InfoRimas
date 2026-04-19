@@ -1,0 +1,273 @@
+@import url('https://fonts.googleapis.com/css2?family=Datatype:wdth,wght@127.9,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+* {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    background-color: black;
+}
+
+/*=============== HEADER =================== */
+.HeaderInicio {
+    display: flex;
+    background-color: #DB2602;
+    height: 80px;
+    gap: 10%;
+}
+
+.header_esquerda {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.header_esquerda img {
+    width: 65px;
+}
+
+.header_esquerda p {
+    font-size: 50px;
+    font-weight: bold;
+    animation-name: AnimacaoTitulo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes AnimacaoTitulo {
+    0% {color: #FFFFFF;}
+    50% {color: #332823;}
+    100% {color: #FFFFFF;}
+}
+
+.header_esquerda p span {
+    animation-name: AnimacaoTituloDois;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes AnimacaoTituloDois {
+    0% {color: #332823;}
+    50% {color: #FFFFFF;}
+    100% {color: #332823;}
+}
+
+
+.header_direita {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    width: 50%;
+}
+
+.header_direita a {
+    color: #332823;
+    text-decoration: none;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.header_direita a:hover {
+    color: #FFFFFF;
+    font-weight: bolder;
+}
+/*=============== HEADER =================== */
+
+
+/*=============== BANNER =================== */
+.banner {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
+        url(../images/Banner.png);
+    position: relative;
+    background-size: cover;
+    height: 500px;
+    display: flex;
+    padding-top: 100px;
+    padding-left: 200px;
+}
+
+.Conteudo_banner {
+    color: #FFFFFF;
+    width: 30%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.Conteudo_banner h1 {
+    font-size: 70px;
+    font-weight: bold;
+}
+
+.Conteudo_banner p {
+    font-size: 35px;
+    font-weight: 700;
+
+}
+
+.Conteudo_banner p span {
+    color: #DB2602;
+}
+
+/*=============== BANNER =================== */
+
+/*=============== Seções =================== */
+
+.Invertido {
+    flex-direction: row-reverse;
+}
+
+.Secao {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5%;
+}
+
+.Secao img {
+    width: 40%;
+}
+
+.ConteudoSecao {
+    width: 40%;
+    gap: 70px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    color: #FFFFFF;
+}
+
+.ConteudoSecao h1 {
+    font-size: 45px;
+    font-weight: bold;
+}
+
+.ConteudoSecao p {
+    font-size: 30px;
+    text-align: justify;
+}   
+
+#ImagemComoSurgiu {
+    width: 45%;
+}
+
+/*=============== Seções =================== */
+
+/*=============== OBJETIVO =================== */
+
+.Objetivo {
+    margin-top: 50px;
+    background-color: #DB2602;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    gap: 40px;
+}
+
+.Objetivo h1 {
+    font-size: 50px;
+}
+
+.Objetivo h1 span{
+    color: #FFFFFF;
+}
+
+.Objetivo p {
+    font-size: 30px;
+    text-align: justify;
+    width: 60%;
+}
+
+.Objetivo a {
+    font-size: 30px;
+    font-weight: bold;
+    background-color: #332823;
+    color: white;
+    text-decoration: none;
+    width: 25%;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    transition: 0.5s;
+}
+
+.Objetivo a:hover {
+    background-color: white;
+    color: #DB2602;
+    border-radius: 10px;
+}
+
+
+/*=============== OBJETIVO =================== */
+
+/*=============== FOOTER =================== */
+
+.FooterInicio {
+    color: #FFFFFF;
+    display: flex;
+    padding: 10px 30px 10px 30px;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+    gap: 5%;
+}
+
+.FooterInicio img {
+    width: 5%;
+}
+
+.FooterContatos {
+    width: 30%;
+}
+
+.FooterContatos h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.FooterPaginas {
+    width: 30%;
+    margin-left: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.FooterPaginas h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.FooterPaginasLinks {
+    display: flex;
+    gap: 50px;
+    padding-left: 18px;
+}
+
+.FooterPaginasLinks ul li a{
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.FooterPaginasLinks ul li a:hover {
+    text-decoration: underline;
+}
+
+
+
+/*=============== FOOTER =================== */
+
+
