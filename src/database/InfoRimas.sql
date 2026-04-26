@@ -9,3 +9,5 @@ CREATE TABLE usuario (
 );
 
 SELECT * FROM usuario;
+USE aquatech;
+SELECT

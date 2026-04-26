@@ -38,7 +38,7 @@
                     <img id="MicSenha" onclick="MostrarSenha()" src="../assets/imgs/microfone-mudo.png" alt="microfone-mudo">
                 </div>
             </div>
-            <button onclick="logar()">LOGAR</button>
+            <button id="botao_logar" onclick="logar()">LOGAR</button>
             <br>
             <div id="div_aguardar" style="width: 50px; display: none;">
                 <img src="../assets/loader-barra.gif" id="loading-gif" style="width: 100%;"/>
@@ -72,8 +72,16 @@
 </body>
     <script src="../js/ExibirSenha.js"></script>
     <script>
+        let cont = 0
         function logar() {
             aguardar();
+            if(cont == 3) {
+                MensagemDeErro('Limite de tentativas excedidas')
+                botao_logar.disabled = true;
+                finalizarAguardar();
+                return false;
+            }
+
 
             let emailLet = ipt_email.value
             let senhaLet = ipt_senha.value
@@ -111,7 +119,8 @@
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.id;
                         
-                        console.log("Estou aqui Deus?")
+                        MensagemDeErro('Logando...')
+                        
                         setTimeout(function () {
                             window.location = "../index.html";
                         }, 1000); // apenas para exibir o loading
@@ -119,19 +128,23 @@
                     });
 
                 } else {
-
                     console.log("Houve um erro ao tentar realizar o login!");
 
                     resposta.text().then(texto => {
                         console.error(texto);
+                        MensagemDeErro('E-mail ou senha incorretos.');
                         finalizarAguardar();
+                        return false;
                     });
                 }
 
             }).catch(function (erro) {
                 console.log(erro);
+                MensagemDeErro('E-mail ou senha incorretos.');
+                return false
             })
-
+            MensagemDeErro('E-mail ou senha incorretos.');
+            cont += 1
             return false;
         }
     </script>
