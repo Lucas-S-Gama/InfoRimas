@@ -1,0 +1,2 @@
+CREATE DATABASE InfoRimas;
+USE InfoRimas;

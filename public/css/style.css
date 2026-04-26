@@ -84,7 +84,7 @@ body {
 .banner {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
-        url(../images/Banner.png);
+        url(../assets/imgs/BannerInicial.png);
     position: relative;
     background-size: cover;
     height: 500px;
