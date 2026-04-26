@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoRimas</title>
+    <title>InfoRimas | Login</title>
     <link rel="shortcut icon" href="/public/assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/LoginCadastro.css">
     <link rel="stylesheet" href="../css/footer.css">
+
+    <script src="../js/sessao.js"></script>
 </head>
 <body>
     <header class="Header">
@@ -38,6 +40,10 @@
             </div>
             <button onclick="logar()">LOGAR</button>
             <br>
+            <div id="div_aguardar" style="width: 50px; display: none;">
+                <img src="../assets/loader-barra.gif" id="loading-gif" style="width: 100%;"/>
+            </div>
+            <p id="Mensage_erro" style="color: red; font-size: 15px; margin-bottom: 10px; background-color: black; padding: 10px; display: none;"></p>
             <a href="#">Esqueci a senha</a>
             <a href="/public/pages/cadastro.html">Não tenho conta cadastrada</a>
         </div>
@@ -67,15 +73,19 @@
     <script src="../js/ExibirSenha.js"></script>
     <script>
         function logar() {
+            aguardar();
+
             let emailLet = ipt_email.value
             let senhaLet = ipt_senha.value
 
             if (emailLet == '' || senhaLet == '') {
-                alert('Preencha todos os campos');
-                    return false;
+                MensagemDeErro('Preencha Todos os campos!')
+                finalizarAguardar();
+                return false;
             } else if (!emailLet.includes('@') || !emailLet.includes('.')) {
-                alert('Digite um email válido');
-                    return false;
+                MensagemDeErro('Preencha o email corretamente!');
+                finalizarAguardar();
+                return false;
             }
 
 
@@ -114,6 +124,7 @@
 
                     resposta.text().then(texto => {
                         console.error(texto);
+                        finalizarAguardar();
                     });
                 }
 

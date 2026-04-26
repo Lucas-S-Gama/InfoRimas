@@ -52,6 +52,10 @@
             </div>
             <button onclick="cadastrar()">CADASTRAR</button>
             <br>
+            <div id="div_aguardar" style="width: 50px; display: none;">
+                <img src="../assets/loader-barra.gif" id="loading-gif" style="width: 100%;"/>
+            </div>
+            <p id="Mensage_erro" style="color: red; font-size: 15px; margin-bottom: 10px; background-color: black; padding: 10px; display: none;"></p>
             <a href="login.html">Já tenho conta!</a>
         </div>
     </div>
@@ -80,26 +84,30 @@
 <script src="../js/ExibirSenha.js"></script>
 <script>
     function cadastrar() {
+        aguardar();
 
-    let nomeLet = ipt_nome.value
-    let emailLet = ipt_email.value
-    let senhaLet = ipt_senha.value
-    let confirmSenhaLet = ipt_confirmarSenha.value
+        let nomeLet = ipt_nome.value
+        let emailLet = ipt_email.value
+        let senhaLet = ipt_senha.value
+        let confirmSenhaLet = ipt_confirmarSenha.value
 
-    if(senhaLet !== confirmSenhaLet) {
-        alert('Senhas diferentes!');
+        if(senhaLet !== confirmSenhaLet) {
+            MensagemDeErro('As senhas não coincidem.');
+            finalizarAguardar();
             return false;
-    } else if (nomeLet == '' || emailLet == '' || senhaLet == '' || confirmSenhaLet == '') {
-        alert('Preencha todos os campos');
+        } else if (nomeLet == '' || emailLet == '' || senhaLet == '' || confirmSenhaLet == '') {
+            MensagemDeErro('Preencha todos os campos');
+            finalizarAguardar();
             return false;
-    } else if (!emailLet.includes('@') || !emailLet.includes('.')) {
-        alert('Digite um email válido');
+        } else if (!emailLet.includes('@') || !emailLet.includes('.')) {
+            MensagemDeErro('Digite um email válido');
+            finalizarAguardar();
             return false;
-    } else if (senhaLet.length < 7) {
-        alert('Digite uma senha com 8 dígitos ou mais');
+        } else if (senhaLet.length < 7) {
+            MensagemDeErro('A senha precisa de no mínimo 8 digitos');
+            finalizarAguardar();
             return false;
-    }
-
+        }
 
     fetch("/usuarios/cadastrar", {
         method: "POST",
@@ -124,12 +132,14 @@
             window.location = "login.html";
           }, "2000");
 
+            finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
       });
 
     return false;

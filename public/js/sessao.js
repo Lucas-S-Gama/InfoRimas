@@ -34,3 +34,7 @@ function finalizarAguardar(texto) {
     }
 }
 
+function MensagemDeErro(frase) {
+    Mensage_erro.innerHTML = frase;
+    Mensage_erro.style.display = "flex"
+}
