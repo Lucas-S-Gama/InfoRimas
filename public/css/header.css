@@ -1,0 +1,67 @@
+/*=============== HEADER =================== */
+.Header {
+    display: flex;
+    background-color: #DB2602;
+    height: 80px;
+    gap: 10%;
+}
+
+.header_esquerda {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: space-around;
+}
+
+.header_esquerda img {
+    width: 65px;
+}
+
+.header_esquerda p {
+    font-size: 50px;
+    font-weight: bold;
+    animation-name: AnimacaoTitulo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+
+@keyframes AnimacaoTitulo {
+    0% {color: #FFFFFF;}
+    50% {color: #332823;}
+    100% {color: #FFFFFF;}
+}
+
+.header_esquerda p span {
+    animation-name: AnimacaoTituloDois;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes AnimacaoTituloDois {
+    0% {color: #332823;}
+    50% {color: #FFFFFF;}
+    100% {color: #332823;}
+}
+
+
+.header_direita {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10%;
+    width: 50%;
+}
+
+.header_direita a {
+    color: #332823;
+    text-decoration: none;
+    font-size: 20px;
+    transition: 0.5s;
+}
+
+.header_direita a:hover {
+    color: #FFFFFF;
+    font-weight: bolder;
+}
+/*=============== HEADER =================== */

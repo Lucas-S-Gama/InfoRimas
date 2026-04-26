@@ -1,0 +1,56 @@
+/*=============== FOOTER =================== */
+
+.Footer {
+    color: #FFFFFF;
+    display: flex;
+    padding: 10px 30px 10px 30px;
+    align-items: center;
+    height: 100px;
+    justify-content: center;
+    gap: 5%;
+}
+
+.Footer img {
+    width: 5%;
+}
+
+.FooterContatos {
+    width: 30%;
+}
+
+.FooterContatos h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.FooterPaginas {
+    width: 30%;
+    margin-left: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.FooterPaginas h1 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.FooterPaginasLinks {
+    display: flex;
+    gap: 50px;
+    padding-left: 18px;
+}
+
+.FooterPaginasLinks ul li a{
+    text-decoration: none;
+    color: #FFFFFF;
+    transition: 0.5s;
+}
+
+.FooterPaginasLinks ul li a:hover {
+    text-decoration: underline;
+}
+
+
+
+/*=============== FOOTER =================== */
