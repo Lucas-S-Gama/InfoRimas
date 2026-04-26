@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoRimas</title>
+    <link rel="shortcut icon" href="/public/assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/LoginCadastro.css">
+    <link rel="stylesheet" href="../css/cadastro.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
     <header class="Header">
@@ -19,6 +23,57 @@
             <a href="/public/pages/sobrenos.html">Sobre nós</a>
         </div>
     </header>
-    <H1>CADASTRO</H1>
+        <div class="banner">
+        <div class="box">
+            <h1>CADASTRO</h1>
+            <div class="box-inputs">
+                <div class="CamposNomeEmail">
+                    <div class="campo">
+                        <span>VULGO/NOME:</span>
+                        <input type="text" placeholder="Ex: Cesar MC">
+                    </div>
+                    <div class="campo">
+                        <span>EMAIL:</span>
+                        <input type="text" placeholder="exemplo@email.com">
+                    </div>
+                </div>
+                <div class="campo">
+                    <span>SENHA:</span>
+                    <input id="ipt_senha" type="password" placeholder="*******">
+                    <img id="MicSenha" onclick="MostrarSenha()" src="../assets/imgs/microfone-mudo.png" alt="microfone-mudo">
+                </div>
+                <div class="campo">
+                    <span>CONFIRME A SENHA:</span>
+                    <input id="ipt_confirmarSenha" type="password" placeholder="*******">
+                    <img id="MicConfirmarSenha" onclick="MostrarConfirmarSenha()" src="../assets/imgs/microfone-mudo.png" alt="microfone-mudo">
+                </div>
+            </div>
+            <button>CADASTRAR</button>
+            <br>
+            <a href="/public/pages/login.html">Já tenho conta!</a>
+        </div>
+    </div>
+    <footer class="Footer">
+        <img src="/public/assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
+        <div class="FooterContatos">
+            <h1>Contatos</h1>
+            <p>Telefone: (xx) - XXXXX-XXXX</p>
+            <p>Email: email@example.com</p>
+        </div>
+        <div class="FooterPaginas">
+            <h1>Páginas</h1>
+            <div class="FooterPaginasLinks">
+                <ul>
+                    <li><a href="/public/index.html">Inicio</a></li>
+                    <li><a href="/public/pages/login.html">Login</a></li>
+                </ul>
+                <ul>
+                    <li><a href="/public/pages/cadastro.html">Cadastro</a></li>
+                    <li><a href="/public/pages/sobrenos.html">Sobre nós</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
+<script src="/public/js/ExibirSenha.js"></script>
 </html>

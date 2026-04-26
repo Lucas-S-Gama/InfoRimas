@@ -23,7 +23,7 @@ body {
     align-items: center;
 }
 
-.box-login {
+.box {
     background-color: rgba(217, 217, 217, 0.5);
     display: flex;
     flex-direction: column;
@@ -44,7 +44,7 @@ body {
     100% {box-shadow: 0px -20px 100px 0px rgba(219, 38, 2, 1);}
 }
 
-.box-login h1 {
+.box h1 {
     font-size: 50px;
     font-weight: bolder;
     margin-bottom: 30px;
@@ -88,7 +88,7 @@ body {
     cursor: pointer;
 }
 
-.box-login button {
+.box button {
     border: 1px solid black;
     margin-top: 30px;
     background-color: #DB2602;
@@ -102,17 +102,18 @@ body {
     cursor: pointer;
 }
 
-.box-login button:hover {
+.box button:hover {
     border: 1px solid white;
     background-color: #FFFFFF;
     color: #DB2602;
 }
 
-.box-login a {
+.box a {
     color: #FFFFFF;
     text-decoration: none;
+    font-weight: bolder;
 }
 
-.box-login a:hover {
+.box a:hover {
     text-decoration: underline;
 }

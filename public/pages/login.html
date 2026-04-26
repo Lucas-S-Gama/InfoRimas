@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoRimas</title>
+    <link rel="shortcut icon" href="/public/assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/LoginCadastro.css">
     <link rel="stylesheet" href="/public/css/footer.css">
 </head>
 <body>
@@ -22,7 +23,7 @@
         </div>
     </header>
     <div class="banner">
-        <div class="box-login">
+        <div class="box">
             <h1>LOGIN</h1>
             <div class="box-inputs">
                 <div class="campo">
@@ -63,16 +64,5 @@
         </div>
     </footer>
 </body>
-    <script>
-        function MostrarSenha() {
-
-            if (ipt_senha.type == 'password') {
-                MicSenha.src = '../assets/imgs/microfone-gravador.png';
-                ipt_senha.type = 'text';
-            } else {
-                MicSenha.src = '../assets/imgs/microfone-mudo.png';
-                ipt_senha.type = 'password';
-            }
-        }
-    </script>
+    <script src="../js/ExibirSenha.js"></script>
 </html>
