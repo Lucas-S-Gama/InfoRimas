@@ -14,7 +14,7 @@ body {
 .banner {
     background-image: 
     linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
-    url(/public/assets/imgs/BannerXamu.jpg);
+    url(../assets/imgs/BannerXamu.jpg);
     background-size: cover;
     background-position: 100%;
     height: 600px;

@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InfoRimas</title>
-    <link rel="shortcut icon" href="/public/assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
+    <title>InfoRimas | Cadastro</title>
+    <link rel="shortcut icon" href="../assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/LoginCadastro.css">
     <link rel="stylesheet" href="../css/cadastro.css">
     <link rel="stylesheet" href="../css/footer.css">
+
+    <script src="../js/sessao.js"></script>
 </head>
 <body>
     <header class="Header">
@@ -17,10 +19,10 @@
             <p>Info<span>Rimas</span></p>
         </div>
         <div class="header_direita">
-            <a href="/public/index.html">Inicio</a>
-            <a href="/public/pages/cadastro.html">Cadastro</a>
-            <a href="/public/pages/login.html">Login</a>
-            <a href="/public/pages/sobrenos.html">Sobre nós</a>
+            <a href="../index.html">Inicio</a>
+            <a href="cadastro.html">Cadastro</a>
+            <a href="login.html">Login</a>
+            <a href="sobrenos.html">Sobre nós</a>
         </div>
     </header>
         <div class="banner">
@@ -30,11 +32,11 @@
                 <div class="CamposNomeEmail">
                     <div class="campo">
                         <span>VULGO/NOME:</span>
-                        <input type="text" placeholder="Ex: Cesar MC">
+                        <input id="ipt_nome" type="text" placeholder="Ex: Cesar MC">
                     </div>
                     <div class="campo">
                         <span>EMAIL:</span>
-                        <input type="text" placeholder="exemplo@email.com">
+                        <input id="ipt_email" type="text" placeholder="exemplo@email.com">
                     </div>
                 </div>
                 <div class="campo">
@@ -48,13 +50,13 @@
                     <img id="MicConfirmarSenha" onclick="MostrarConfirmarSenha()" src="../assets/imgs/microfone-mudo.png" alt="microfone-mudo">
                 </div>
             </div>
-            <button>CADASTRAR</button>
+            <button onclick="cadastrar()">CADASTRAR</button>
             <br>
-            <a href="/public/pages/login.html">Já tenho conta!</a>
+            <a href="login.html">Já tenho conta!</a>
         </div>
     </div>
     <footer class="Footer">
-        <img src="/public/assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
+        <img src="../assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
         <div class="FooterContatos">
             <h1>Contatos</h1>
             <p>Telefone: (xx) - XXXXX-XXXX</p>
@@ -64,16 +66,74 @@
             <h1>Páginas</h1>
             <div class="FooterPaginasLinks">
                 <ul>
-                    <li><a href="/public/index.html">Inicio</a></li>
-                    <li><a href="/public/pages/login.html">Login</a></li>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
                 <ul>
-                    <li><a href="/public/pages/cadastro.html">Cadastro</a></li>
-                    <li><a href="/public/pages/sobrenos.html">Sobre nós</a></li>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="sobrenos.html">Sobre nós</a></li>
                 </ul>
             </div>
         </div>
     </footer>
 </body>
-<script src="/public/js/ExibirSenha.js"></script>
+<script src="../js/ExibirSenha.js"></script>
+<script>
+    function cadastrar() {
+
+    let nomeLet = ipt_nome.value
+    let emailLet = ipt_email.value
+    let senhaLet = ipt_senha.value
+    let confirmSenhaLet = ipt_confirmarSenha.value
+
+    if(senhaLet !== confirmSenhaLet) {
+        alert('Senhas diferentes!');
+            return false;
+    } else if (nomeLet == '' || emailLet == '' || senhaLet == '' || confirmSenhaLet == '') {
+        alert('Preencha todos os campos');
+            return false;
+    } else if (!emailLet.includes('@') || !emailLet.includes('.')) {
+        alert('Digite um email válido');
+            return false;
+    } else if (senhaLet.length < 7) {
+        alert('Digite uma senha com 8 dígitos ou mais');
+            return false;
+    }
+
+
+    fetch("/usuarios/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            // crie um atributo que recebe o valor recuperado aqui
+            // Agora vá para o arquivo routes/usuario.js
+            nomeServer: nomeLet,
+            emailServer: emailLet,
+            senhaServer: senhaLet,
+        }),
+    })
+    .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+            alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+
+    return false;
+
+    }
+</script>
 </html>
