@@ -28,7 +28,7 @@
             <div class="box-inputs">
                 <div class="campo">
                     <span>EMAIL:</span>
-                    <input type="text" placeholder="exemplo@email.com">
+                    <input id="ipt_email" type="text" placeholder="exemplo@email.com">
                 </div>
                 <div class="campo">
                     <span>SENHA:</span>
@@ -36,7 +36,7 @@
                     <img id="MicSenha" onclick="MostrarSenha()" src="../assets/imgs/microfone-mudo.png" alt="microfone-mudo">
                 </div>
             </div>
-            <button>LOGAR</button>
+            <button onclick="logar()">LOGAR</button>
             <br>
             <a href="#">Esqueci a senha</a>
             <a href="/public/pages/cadastro.html">Não tenho conta cadastrada</a>
@@ -65,4 +65,63 @@
     </footer>
 </body>
     <script src="../js/ExibirSenha.js"></script>
+    <script>
+        function logar() {
+            let emailLet = ipt_email.value
+            let senhaLet = ipt_senha.value
+
+            if (emailLet == '' || senhaLet == '') {
+                alert('Preencha todos os campos');
+                    return false;
+            } else if (!emailLet.includes('@') || !emailLet.includes('.')) {
+                alert('Digite um email válido');
+                    return false;
+            }
+
+
+            fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailLet,
+                senhaServer: senhaLet
+            })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.EMAIL_USUARIO = json.email;
+                        sessionStorage.NOME_USUARIO = json.nome;
+                        sessionStorage.ID_USUARIO = json.id;
+                        
+                        console.log("Estou aqui Deus?")
+                        setTimeout(function () {
+                            window.location = "../index.html";
+                        }, 1000); // apenas para exibir o loading
+
+                    });
+
+                } else {
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
+            })
+
+            return false;
+        }
+    </script>
 </html>
