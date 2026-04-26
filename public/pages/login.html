@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoRimas</title>
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="/public/css/footer.css">
+</head>
+<body>
+    <header class="Header">
+        <div class="header_esquerda">
+            <img src="../assets/icon/LogoInfoRimasPreta.png" alt="LogoPreta">
+            <p>Info<span>Rimas</span></p>
+        </div>
+        <div class="header_direita">
+            <a href="/public/index.html">Inicio</a>
+            <a href="/public/pages/cadastro.html">Cadastro</a>
+            <a href="/public/pages/login.html">Login</a>
+            <a href="/public/pages/sobrenos.html">Sobre nós</a>
+        </div>
+    </header>
+    <div class="banner">
+        <div class="box-login">
+            <h1>LOGIN</h1>
+            <div class="box-inputs">
+                <div class="campo">
+                    <span>EMAIL:</span>
+                    <input type="text" placeholder="exemplo@email.com">
+                </div>
+                <div class="campo">
+                    <span>SENHA:</span>
+                    <input id="ipt_senha" type="password" placeholder="*******">
+                    <img id="MicSenha" onclick="MostrarSenha()" src="../assets/imgs/microfone-mudo.png" alt="microfone-mudo">
+                </div>
+            </div>
+            <button>LOGAR</button>
+            <br>
+            <a href="#">Esqueci a senha</a>
+            <a href="/public/pages/cadastro.html">Não tenho conta cadastrada</a>
+        </div>
+    </div>
+    <footer class="Footer">
+        <img src="/public/assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
+        <div class="FooterContatos">
+            <h1>Contatos</h1>
+            <p>Telefone: (xx) - XXXXX-XXXX</p>
+            <p>Email: email@example.com</p>
+        </div>
+        <div class="FooterPaginas">
+            <h1>Páginas</h1>
+            <div class="FooterPaginasLinks">
+                <ul>
+                    <li><a href="/public/index.html">Inicio</a></li>
+                    <li><a href="/public/pages/login.html">Login</a></li>
+                </ul>
+                <ul>
+                    <li><a href="/public/pages/cadastro.html">Cadastro</a></li>
+                    <li><a href="/public/pages/sobrenos.html">Sobre nós</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+    <script>
+        function MostrarSenha() {
+
+            if (ipt_senha.type == 'password') {
+                MicSenha.src = '../assets/imgs/microfone-gravador.png';
+                ipt_senha.type = 'text';
+            } else {
+                MicSenha.src = '../assets/imgs/microfone-mudo.png';
+                ipt_senha.type = 'password';
+            }
+        }
+    </script>
+</html>

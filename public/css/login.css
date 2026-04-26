@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Datatype:wdth,wght@127.9,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+* {
+    font-family: 'Lato', sans-serif;
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    background-color: black;
+}
+
+.banner {
+    background-image: 
+    linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7)),
+    url(/public/assets/imgs/BannerXamu.jpg);
+    background-size: cover;
+    background-position: 100%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-login {
+    background-color: rgba(217, 217, 217, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    width: 25%;
+    height: 400px;
+    animation-name: BoxShadowBoxLogin;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes BoxShadowBoxLogin {
+    0% {box-shadow: 0px -20px 100px 0px rgba(219, 38, 2, 1);}
+    25% {box-shadow: 10px 10px 100px 0px rgb(255, 255, 255, 1);}
+    50% {box-shadow: -10px 10px 100px 0px rgb(51, 40, 28, 1);}
+    100% {box-shadow: 0px -20px 100px 0px rgba(219, 38, 2, 1);}
+}
+
+.box-login h1 {
+    font-size: 50px;
+    font-weight: bolder;
+    margin-bottom: 30px;
+}
+
+.box-inputs {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.campo {
+    padding: 10px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.campo span {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.campo input {
+    border: 2px solid black;
+    height: 40px;
+    border-radius: 5px 5px 20px 0;
+    position: relative;
+    padding-left: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3);
+}
+
+.campo img {
+    width: 25px;
+    height: 25px;
+    position: absolute;
+    align-self: flex-end;
+    margin-top: 30px;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.box-login button {
+    border: 1px solid black;
+    margin-top: 30px;
+    background-color: #DB2602;
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: bolder;
+    width: 60%;
+    height: 50px;
+    border-radius: 10px;
+    transition: 1s;
+    cursor: pointer;
+}
+
+.box-login button:hover {
+    border: 1px solid white;
+    background-color: #FFFFFF;
+    color: #DB2602;
+}
+
+.box-login a {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.box-login a:hover {
+    text-decoration: underline;
+}
