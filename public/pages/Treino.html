@@ -6,6 +6,8 @@
     <title>InfoRimas | Treino</title>
     <link rel="shortcut icon" href="../assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/Treino.css">
+    <link rel="stylesheet" href="../css/footer.css">
 </head>
 <body>
     <header class="Header">
@@ -14,39 +16,136 @@
             <p>Info<span>Rimas</span></p>
         </div>
         <div class="header_direita">
-            <a href="../index.html">Inicio</a>
-            <a href="cadastro.html">Cadastro</a>
-            <a href="login.html">Login</a>
-            <a href="sobrenos.html">Sobre nós</a>
+            <a href="#">Home</a>
+            <a href="#">Treino</a>
+            <a href="#">Rank</a>
+            <a href="../index.html">Sair</a>
         </div>
     </header>
 
+    <section class="secao secao_instrucao">
+      <h1>Instruções para o treino:</h1>
+      <div class="instrucoes_lista">
+        <ul>
+          <li>
+            Selecione o modo de treino
+          </li>
+          <li>
+            Selecione o tempo de treino
+          </li>
+          <li>
+            Selecione o Beat (Ou não)
+          </li>
+        </ul>
+        <ul>
+          <li>
+            Clique em ”Começar treino!” para iniciar
+          </li>
+          <li>
+            Seu treino será registrado em Rank
+          </li>
+          <li>
+            Clique em “Começar treino!” para recomeçar
+          </li>
+        </ul>
+      </div>
+    </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-<!-- <iframe 
-  style="border-radius:12px" 
-  src="https://open.spotify.com/embed/track/0nbhwvRYCcLWPBCFdLv6Ov?utm_source=generator&theme=0" 
-  width="20%" 
-  height="80" 
-  frameBorder="0" 
-  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-  loading="lazy">
-</iframe> -->
+    <section class="secao selecionar_box">
+      <div>
+        <p class="selects_titulo">SELECIONAR MODO</p>
+        <select name="" id="">
+          <option value="">Easy</option>
+          <option value="">Hard</option>
+          <option value="">Tema</option>
+        </select>
+        <p>Uma palavra a cada 15 segundos</p>
+      </div>
+      <div>
+        <p class="selects_titulo">SELECIONAR TEMPO</p>
+        <select name="" id="">
+          <option value="">60s</option>
+          <option value="">45s</option>
+          <option value="">90s</option>
+        </select>
+        <p>60 segundos no total</p>
+      </div>
+      <div>
+        <p class="selects_titulo">SELECIONAR BEAT</p>
+        <select name="" id="">
+          <option value="">Lean Back</option>
+          <option value="">Detroit Type Beat</option>
+          <option value="">Boom</option>
+        </select>
+        <p>Instrumental do música</p>
+      </div>
+    </section>
+    <section class="font_barlow secao_button">
+      <button>Começar treino!</button>
+    </section>
+    <section class="font_barlow secao_treinoDinamico">
+      <div class="esquerda_treinoDinamico">
+        <div class="descricao_treino">
+          <p>Rime com a palavra que está aparecendo.</p>
+          <p>Uma palavra a cada 15 segundos.</p>
+        </div>
+        <div class="Exibicao_TempoMusica">
+          <div class="CirculoBrancoTempo">
+            <div class="conteudo_CirculoBrancoTempo">
+              <p>37</p>
+              <p>segundos</p>
+            </div>
+          </div>
+          <div class="exibicao_musica">
+            <iframe 
+              style="border-radius:12px" 
+              src="https://open.spotify.com/embed/track/0nbhwvRYCcLWPBCFdLv6Ov?utm_source=generator&theme=0" 
+              width="100%" 
+              height="100%" 
+              frameBorder="0" 
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+        <div class="PalavraModo">
+          <div class="BarraConteudo BarraPalavra">
+            <p>Esporte</p>
+          </div>
+          <div class="BarraConteudo BarraModo">
+            <p>Easy Mode</p>
+          </div>
+        </div>
+      </div>
+      <div class="direita_treinoDinamico">
+        <p>Palavras que passaram:</p>
+        <p>
+          Vago <br>
+          Passagem
+        </p>
+      </div>
+    </section>
+    <hr>
+    <footer class="Footer">
+    <img src="../assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
+    <div class="FooterContatos">
+        <h1>Contatos</h1>
+        <p>Telefone: (xx) - XXXXX-XXXX</p>
+        <p>Email: email@example.com</p>
+    </div>
+    <div class="FooterPaginas">
+        <h1>Páginas</h1>
+        <div class="FooterPaginasLinks">
+            <ul>
+                <li><a href="../index.html">Inicio</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+            <ul>
+                <li><a href="cadastro.html">Cadastro</a></li>
+                <li><a href="sobrenos.html">Sobre nós</a></li>
+            </ul>
+        </div>
+    </div>
+  </footer>
 </body>
 </html>
