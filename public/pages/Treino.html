@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/Treino.css">
     <link rel="stylesheet" href="../css/footer.css">
+  
+      <script src="../js/sessao.js"></script>
 </head>
 <body>
     <header class="Header">
@@ -42,7 +44,7 @@
             Clique em ”Começar treino!” para iniciar
           </li>
           <li>
-            Seu treino será registrado em Rank
+            Utiliza o play do spotify para controlar a música
           </li>
           <li>
             Clique em “Começar treino!” para recomeçar
@@ -54,52 +56,55 @@
     <section class="secao selecionar_box">
       <div>
         <p class="selects_titulo">SELECIONAR MODO</p>
-        <select name="" id="">
-          <option value="">Easy</option>
-          <option value="">Hard</option>
-          <option value="">Tema</option>
+        <select id="slt_ModoDeTreino">
+          <option value="Easy Mode">Easy</option>
+          <option value="Normal Mode">Normal</option>
+          <option value="Hard Mode">Hard</option>
         </select>
-        <p>Uma palavra a cada 15 segundos</p>
+        <p>Quanto maior a dificuldade, mais palavras aparecem</p>
       </div>
       <div>
         <p class="selects_titulo">SELECIONAR TEMPO</p>
-        <select name="" id="">
-          <option value="">60s</option>
-          <option value="">45s</option>
-          <option value="">90s</option>
+        <select id="slt_TempoDeTreino">
+          <option value="30">30s</option>
+          <option value="45">45s</option>
+          <option value="60">60s</option>
         </select>
-        <p>60 segundos no total</p>
+        <p>Tempo total do treino</p>
       </div>
       <div>
         <p class="selects_titulo">SELECIONAR BEAT</p>
-        <select name="" id="">
-          <option value="">Lean Back</option>
-          <option value="">Detroit Type Beat</option>
-          <option value="">Boom</option>
+        <select id="slt_BeatDeTreino">
+          <option value="Lean Back">Lean Back</option>
+          <option value="Detroit Type Beat">Detroit Type Beat</option>
+          <option value="Boom">Boom</option>
         </select>
-        <p>Instrumental do música</p>
+        <p>Instrumental de músicas</p>
       </div>
     </section>
     <section class="font_barlow secao_button">
-      <button>Começar treino!</button>
+      <button id="id_buttonComecar" onclick="ComecarTreino()">Começar treino!</button>
     </section>
-    <section class="font_barlow secao_treinoDinamico">
+    <div id="div_aguardar" style="width: 250px; display: none; justify-self: center;">
+        <img src="../assets/loader-bola.gif" id="loading-gif" style="width: 100%;"/>
+    </div>
+    <section class="font_barlow secao_treinoDinamico" id="id_secao_treinoDinamico">
       <div class="esquerda_treinoDinamico">
         <div class="descricao_treino">
-          <p>Rime com a palavra que está aparecendo.</p>
-          <p>Uma palavra a cada 15 segundos.</p>
+          <p id="id_DescricaoDoModo">Rime com a palavra, uma palavra a cada 15 segundos.</p>
         </div>
         <div class="Exibicao_TempoMusica">
           <div class="CirculoBrancoTempo">
             <div class="conteudo_CirculoBrancoTempo">
-              <p>37</p>
+              <p id="id_TempoTotal"></p>
               <p>segundos</p>
             </div>
           </div>
           <div class="exibicao_musica">
             <iframe 
+              id="id_PlayerSpotify"
               style="border-radius:12px" 
-              src="https://open.spotify.com/embed/track/0nbhwvRYCcLWPBCFdLv6Ov?utm_source=generator&theme=0" 
+              src="" 
               width="100%" 
               height="100%" 
               frameBorder="0" 
@@ -113,7 +118,7 @@
             <p>Esporte</p>
           </div>
           <div class="BarraConteudo BarraModo">
-            <p>Easy Mode</p>
+            <p id="id_ModoSelecionado"></p>
           </div>
         </div>
       </div>
@@ -148,4 +153,74 @@
     </div>
   </footer>
 </body>
+  <script>
+    function ComecarTreino() {
+      id_buttonComecar.disabled = true
+      aguardar();
+      
+      let ModoNome = slt_ModoDeTreino.value;
+      let BeatNome = slt_BeatDeTreino.value;
+      let TempoDeTreino = slt_TempoDeTreino.value;
+
+        let PalavrasAleatorias = [
+          "teclado", "montanha", "algoritmo", "oceano", "javascript", 
+          "biblioteca", "universo", "conexão", "projeto", "nuvem", 
+          "desafio", "janela", "música", "estrada", "código", 
+          "planeta", "energia", "futuro", "espelho", "horizonte"
+        ];
+
+        fetch(`/treino/PegarURLMusica/${BeatNome}`, { cache: 'no-store'}).then(function (resposta) {
+          if(resposta.ok) {
+            resposta.json().then(function (reposta) {
+              let url = reposta[0].beaturl;
+              id_PlayerSpotify.src = `${reposta[0].beaturl}`
+            })
+          } else {
+            return console.log('API error');
+          }
+        });
+
+        fetch(`/treino/ListarInfosModoTreino/${ModoNome}`, {cache: 'no-store'}).then(function (resposta) {
+          if(resposta.ok) {
+            resposta.json().then(function (resposta) {
+              let descricao = resposta[0].descricao;
+              let nomeModo = resposta[0].nome;
+              id_DescricaoDoModo.innerHTML = `${descricao}`;
+              id_ModoSelecionado.innerHTML = `${nomeModo}`;   
+            });
+          } else {
+            return console.log('API error');
+          }
+        })
+
+        fetch(`/treino/PegarTempoTreino/${TempoDeTreino}`, {cache: 'no-store'}).then(function (resposta) {
+          if(resposta.ok) {
+            resposta.json().then(function (reposta) {
+              TempoDeTreino = reposta[0].tempo_segundos;
+              id_TempoTotal.innerHTML = `${TempoDeTreino}`    
+            })
+          } else {
+             return console.log('API error')
+          }
+        })
+        finalizarAguardar();
+
+
+        let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
+        treinoDinamico.style.display = 'flex';
+
+        const timer = setInterval(() => {
+
+
+          if (TempoDeTreino <= 0) {
+            id_buttonComecar.disabled = false
+            clearInterval(timer)
+          } else {
+            TempoDeTreino -= 1;
+            console.log(TempoDeTreino)
+            id_TempoTotal.innerHTML = `${TempoDeTreino}`    
+          }
+        }, 1000)
+    }
+  </script>
 </html>
