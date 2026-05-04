@@ -1,13 +1,16 @@
 var treinoModel = require("../models/treinoModel");
 
 function RegistrarTreino(req, res) {
-    var nome = req.body.nome;
+    var fk_idUsuario = req.body.idUsuario;
+    var fk_ModoTreino = req.body.idModoTreino;
+    var fk_TempoTreino = req.body.idTempoTreino;
+    var fk_BeatTreino = req.body.idBeatTreino;
 
-    if (nome == undefined) {
+    if (fk_idUsuario == undefined) {
         res.status(400).send("Seu nome está undefined!");
     }
 
-    treinoModel.RegistrarTreino(nome).then(function(resposta){
+    treinoModel.RegistrarTreino(fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_BeatTreino).then(function(resposta){
         res.status(200).send("Treino registrado com sucesso");
     }).catch(function(erro){
         res.status(500).json(erro.sqlMessage);

@@ -170,83 +170,114 @@
       let TempoParaTrocaDePalavra = 0;
       let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
       let PalavrasPassadas = [];
-      
-        await fetch(`/treino/PegarURLMusica/${BeatNome}`, { cache: 'no-store'}).then(function (resposta) {
-          if(resposta.ok) {
-            resposta.json().then(function (reposta) {
-              let url = reposta[0].beaturl;
-              id_PlayerSpotify.src = `${reposta[0].beaturl}`
-            })
-          } else {
-            return console.log('API error');
-          }
-        });
 
-        await fetch(`/treino/ListarInfosModoTreino/${ModoNome}`, {cache: 'no-store'}).then(function (resposta) {
-          if(resposta.ok) {
-            resposta.json().then(function (resposta) {
-              let descricao = resposta[0].descricao;
-              let nomeModo = resposta[0].nome;
-              id_DescricaoDoModo.innerHTML = `${descricao}`;
-              id_ModoSelecionado.innerHTML = `${nomeModo}`;
-              TempoParaTrocaDePalavra = resposta[0].tempoPorPalavra;
-            });
-          } else {
-            return console.log('API error');
-          }
-        })
+      let credenciaisRegistros = [{
+        "idUsuario": sessionStorage.ID_USUARIO,
+        "idModoTreino": '',
+        "idTempoTreino": '',
+        "idBeatTreino": ''
+      }]
 
-        await fetch(`/treino/PegarTempoTreino/${TempoDeTreino}`, {cache: 'no-store'}).then(function (resposta) {
-          if(resposta.ok) {
-            resposta.json().then(function (reposta) {
-              TempoTotal = reposta[0].tempo_segundos;
-              TempoDeTreino = reposta[0].tempo_segundos;
-              id_TempoTotal.innerHTML = `${TempoDeTreino}`    
-            })
-          } else {
-             return console.log('API error')
-          }
-        })
-        finalizarAguardar();
+      await fetch(`/treino/PegarURLMusica/${BeatNome}`, { cache: 'no-store'}).then(function (resposta) {
+        if(resposta.ok) {
+          resposta.json().then(function (resposta) {
+            let url = resposta[0].beaturl;
+            id_PlayerSpotify.src = `${resposta[0].beaturl}`;
+            credenciaisRegistros[0].idBeatTreino = resposta[0].idBeatTreino;
+          })
+        } else {
+          return console.log('API error');
+        }
+      });
 
-        treinoDinamico.style.display = 'flex';
+      await fetch(`/treino/ListarInfosModoTreino/${ModoNome}`, {cache: 'no-store'}).then(function (resposta) {
+        if(resposta.ok) {
+          resposta.json().then(function (resposta) {
+            let descricao = resposta[0].descricao;
+            let nomeModo = resposta[0].nome;
+            id_DescricaoDoModo.innerHTML = `${descricao}`;
+            id_ModoSelecionado.innerHTML = `${nomeModo}`;
+            TempoParaTrocaDePalavra = resposta[0].tempoPorPalavra;
+            credenciaisRegistros[0].idModoTreino = resposta[0].idModoTreino;
+          });
+        } else {
+          return console.log('API error');
+        }
+      })
 
-        const timer = setInterval(() => {
-          if (TempoTotal == TempoDeTreino) {
-            let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
-            let PalavraGerada = PalavrasAleatorias[NumAleatoria]
-            PalavraAleatoriaGerada.innerHTML = PalavraGerada;
-            PalavrasPassadas.push(PalavraGerada);
-            BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
-          }
-          if (TempoDeTreino <= 0) {
-            id_buttonComecar.disabled = false
-            clearInterval(timer)
-          } else {
-            TempoDeTreino -= 1;
-            id_TempoTotal.innerHTML = `${TempoDeTreino}`;
-          }
-        }, 1000)
+      await fetch(`/treino/PegarTempoTreino/${TempoDeTreino}`, {cache: 'no-store'}).then(function (resposta) {
+        if(resposta.ok) {
+          resposta.json().then(function (resposta) {
+            TempoTotal = resposta[0].tempo_segundos;
+            TempoDeTreino = resposta[0].tempo_segundos;
+            id_TempoTotal.innerHTML = `${TempoDeTreino}` ;
+            credenciaisRegistros[0].idTempoTreino = resposta[0].idTempoTreino;   
+          })
+        } else {
+            return console.log('API error')
+        }
+      })
+      finalizarAguardar();
 
-        let i = 0;
-        const timerPalavra = setInterval(() => {
-          if(TempoDeTreino >= TempoParaTrocaDePalavra) {
-            while(i < PalavrasAleatorias.length) {
-              let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
-              let PalavraGerada = PalavrasAleatorias[NumAleatoria];
-              
-              console.log(PalavrasPassadas)
-              if (!PalavrasPassadas.includes(PalavraGerada)) {
-                  PalavrasPassadas.push(PalavraGerada);
-                  PalavraAleatoriaGerada.innerHTML = PalavraGerada;
-                  BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`;          
-                  return;
-              };
+      treinoDinamico.style.display = 'flex';
 
-              i++;
+      const timer = setInterval(() => {
+        if (TempoTotal == TempoDeTreino) {
+          let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
+          let PalavraGerada = PalavrasAleatorias[NumAleatoria]
+          PalavraAleatoriaGerada.innerHTML = PalavraGerada;
+          PalavrasPassadas.push(PalavraGerada);
+          BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
+        }
+        if (TempoDeTreino <= 0) {
+          id_buttonComecar.disabled = false
+
+          fetch("/treino/RegistrarTreino", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idUsuario: credenciaisRegistros[0].idUsuario,
+                idModoTreino: credenciaisRegistros[0].idModoTreino,
+                idTempoTreino: credenciaisRegistros[0].idTempoTreino,
+                idBeatTreino: credenciaisRegistros[0].idBeatTreino
+            }),
+          }).then(function (resposta) {
+            if (!resposta.ok) {
+              throw "Houve um erro ao tentar realizar o registro do treino!";
             }
+          })
+          .catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+          });
+
+          clearInterval(timer)
+        } else {
+          TempoDeTreino -= 1;
+          id_TempoTotal.innerHTML = `${TempoDeTreino}`;
+        }
+      }, 1000)
+
+      let i = 0;
+      const timerPalavra = setInterval(() => {
+        if(TempoDeTreino >= TempoParaTrocaDePalavra) {
+          while(i < PalavrasAleatorias.length) {
+            let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
+            let PalavraGerada = PalavrasAleatorias[NumAleatoria];
+            
+            if (!PalavrasPassadas.includes(PalavraGerada)) {
+                PalavrasPassadas.push(PalavraGerada);
+                PalavraAleatoriaGerada.innerHTML = PalavraGerada;
+                BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`;          
+                return;
+            };
+
+            i++;
           }
-        }, (TempoParaTrocaDePalavra * 1000));
+        }
+      }, (TempoParaTrocaDePalavra * 1000));
     }
   </script>
 </html>

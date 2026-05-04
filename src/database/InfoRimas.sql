@@ -52,6 +52,7 @@ CREATE TABLE RegistroTreino (
 
 SELECT tempoPorPalavra FROM ModoTreino WHERE nome = 'Hard Mode';
 
+SELECT * FROM usuario;
 
 SELECT beaturl FROM BeatTreino WHERE nome = 'Lean Back';
 
@@ -59,4 +60,8 @@ SELECT nome, descricao, tempoPorPalavra FROM ModoTreino WHERE nome = 'Easy Mode'
 
 SELECT tempo_segundos FROM TempoTreino WHERE tempo_segundos = 45;
 
+INSERT INTO RegistroTreino (fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_BeatTreino) VALUES 
+(1, 1, 1, 1);
+
+SELECT * FROM RegistroTreino;
 
