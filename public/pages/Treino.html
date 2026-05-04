@@ -115,7 +115,7 @@
         </div>
         <div class="PalavraModo">
           <div class="BarraConteudo BarraPalavra">
-            <p>Esporte</p>
+            <p id="PalavraAleatoriaGerada"></p>
           </div>
           <div class="BarraConteudo BarraModo">
             <p id="id_ModoSelecionado"></p>
@@ -124,9 +124,7 @@
       </div>
       <div class="direita_treinoDinamico">
         <p>Palavras que passaram:</p>
-        <p>
-          Vago <br>
-          Passagem
+        <p id="BoxPalavrasPassadas">
         </p>
       </div>
     </section>
@@ -154,22 +152,26 @@
   </footer>
 </body>
   <script>
-    function ComecarTreino() {
+    async function ComecarTreino() {
+      BoxPalavrasPassadas.innerHTML = '';
       id_buttonComecar.disabled = true
       aguardar();
       
       let ModoNome = slt_ModoDeTreino.value;
       let BeatNome = slt_BeatDeTreino.value;
       let TempoDeTreino = slt_TempoDeTreino.value;
-
-        let PalavrasAleatorias = [
-          "teclado", "montanha", "algoritmo", "oceano", "javascript", 
-          "biblioteca", "universo", "conexão", "projeto", "nuvem", 
-          "desafio", "janela", "música", "estrada", "código", 
-          "planeta", "energia", "futuro", "espelho", "horizonte"
-        ];
-
-        fetch(`/treino/PegarURLMusica/${BeatNome}`, { cache: 'no-store'}).then(function (resposta) {
+      let TempoTotal = 0;
+      let PalavrasAleatorias = [
+        "teclado", "montanha", "algoritmo", "oceano", "javascript", 
+        "biblioteca", "universo", "conexão", "projeto", "nuvem", 
+        "desafio", "janela", "música", "estrada", "código", 
+        "planeta", "energia", "futuro", "espelho", "horizonte"
+      ];
+      let TempoParaTrocaDePalavra = 0;
+      let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
+      let PalavrasPassadas = [];
+      
+        await fetch(`/treino/PegarURLMusica/${BeatNome}`, { cache: 'no-store'}).then(function (resposta) {
           if(resposta.ok) {
             resposta.json().then(function (reposta) {
               let url = reposta[0].beaturl;
@@ -180,22 +182,24 @@
           }
         });
 
-        fetch(`/treino/ListarInfosModoTreino/${ModoNome}`, {cache: 'no-store'}).then(function (resposta) {
+        await fetch(`/treino/ListarInfosModoTreino/${ModoNome}`, {cache: 'no-store'}).then(function (resposta) {
           if(resposta.ok) {
             resposta.json().then(function (resposta) {
               let descricao = resposta[0].descricao;
               let nomeModo = resposta[0].nome;
               id_DescricaoDoModo.innerHTML = `${descricao}`;
-              id_ModoSelecionado.innerHTML = `${nomeModo}`;   
+              id_ModoSelecionado.innerHTML = `${nomeModo}`;
+              TempoParaTrocaDePalavra = resposta[0].tempoPorPalavra;
             });
           } else {
             return console.log('API error');
           }
         })
 
-        fetch(`/treino/PegarTempoTreino/${TempoDeTreino}`, {cache: 'no-store'}).then(function (resposta) {
+        await fetch(`/treino/PegarTempoTreino/${TempoDeTreino}`, {cache: 'no-store'}).then(function (resposta) {
           if(resposta.ok) {
             resposta.json().then(function (reposta) {
+              TempoTotal = reposta[0].tempo_segundos;
               TempoDeTreino = reposta[0].tempo_segundos;
               id_TempoTotal.innerHTML = `${TempoDeTreino}`    
             })
@@ -205,22 +209,44 @@
         })
         finalizarAguardar();
 
-
-        let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
         treinoDinamico.style.display = 'flex';
 
         const timer = setInterval(() => {
-
-
+          if (TempoTotal == TempoDeTreino) {
+            let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
+            let PalavraGerada = PalavrasAleatorias[NumAleatoria]
+            PalavraAleatoriaGerada.innerHTML = PalavraGerada;
+            PalavrasPassadas.push(PalavraGerada);
+            BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
+          }
           if (TempoDeTreino <= 0) {
             id_buttonComecar.disabled = false
             clearInterval(timer)
           } else {
             TempoDeTreino -= 1;
-            console.log(TempoDeTreino)
-            id_TempoTotal.innerHTML = `${TempoDeTreino}`    
+            id_TempoTotal.innerHTML = `${TempoDeTreino}`;
           }
         }, 1000)
+
+        let i = 0;
+        const timerPalavra = setInterval(() => {
+          if(TempoDeTreino >= TempoParaTrocaDePalavra) {
+            while(i < PalavrasAleatorias.length) {
+              let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
+              let PalavraGerada = PalavrasAleatorias[NumAleatoria];
+              
+              console.log(PalavrasPassadas)
+              if (!PalavrasPassadas.includes(PalavraGerada)) {
+                  PalavrasPassadas.push(PalavraGerada);
+                  PalavraAleatoriaGerada.innerHTML = PalavraGerada;
+                  BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`;          
+                  return;
+              };
+
+              i++;
+            }
+          }
+        }, (TempoParaTrocaDePalavra * 1000));
     }
   </script>
 </html>
