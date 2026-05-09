@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoRimas | Rank</title>
+    <link rel="shortcut icon" href="../assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/rank.css">
+
+    <script src="../js/sessao.js"></script>
+</head>
+<body onload="CarregarInfos()">
+    <header class="Header">
+        <div class="header_esquerda">
+            <img src="../assets/icon/LogoInfoRimasPreta.png" alt="LogoPreta">
+            <p>Info<span>Rimas</span></p>
+        </div>
+        <div class="header_direita">
+            <a href="home.html">Home</a>
+            <a href="Treino.html">Treino</a>
+            <a href="rank.html">Rank</a>
+            <a href="../index.html">Sair</a>
+        </div>
+    </header>
+    <section class="PrimeiraSecao">
+        <div class="PrimeiraSecaoEsquerda">
+            <div class="BoxKpi">
+                <h1><span>Modo</span> de treino preferido entre os usuários</h1>
+                <div class="descricoes">
+                    <p id="ModoFavorito"></p>
+                    <p id="PorcentagemModoFavorito"></p>
+                </div>
+            </div>
+            <div class="BoxKpi">
+                <h1><span>Tempo</span> de treino popular entre os usuários</h1>
+                <div class="descricoes">
+                    <p id="TempoFavorito"></p>
+                    <p id="PorcentagemTempoFavorito"></p>
+                </div>
+            </div>
+            <div class="BoxKpi">
+                <h1><span>Beat</span> de treino mais utilizado entre os usuários</h1>
+                <div class="descricoes">
+                    <p id="BeatFavorito"></p>
+                    <p id="PorcentagemBeatFavorito"></p>
+                </div>
+            </div>
+        </div>
+        <div class="PrimeiraSecaoDireita">
+            <h1>Usuários que mais treinam</h1>
+            <div class="usuariosRanks" id="usuarioRanksa">
+            </div>
+        </div>
+    </section>
+</body>
+    <script>
+        async function CarregarInfos() {
+            
+
+            await fetch('/rank/CaptarModoFavorito').then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        let nome = resposta[0].nome
+                        let PorcentagemDeUso = resposta[0].PorcentagemDeUso
+
+                        ModoFavorito.innerHTML = `${nome}`;
+                        PorcentagemModoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios preferem esse modo`;
+                    })
+                }
+                else {
+                    ModoFavorito.innerHTML = 'Não localizado';
+                    PorcentagemModoFavorito.innerHTML = 'Não localizado';
+                }
+            })
+
+            await fetch('/rank/CaptarTempoFavorito').then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        let tempo_segundos = resposta[0].tempo_segundos
+                        let PorcentagemDeUso = resposta[0].PorcentagemDeUso
+
+                        TempoFavorito.innerHTML = `${tempo_segundos}s`;
+                        PorcentagemTempoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios utilizam esse beat`;
+                    })
+                }
+                else {
+                    TempoFavorito.innerHTML = 'Não localizado';
+                    PorcentagemTempoFavorito.innerHTML = 'Não localizado';
+                }
+            })
+
+            await fetch('/rank/CaptarBeatFavorito').then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        let nome = resposta[0].nome
+                        let PorcentagemDeUso = resposta[0].PorcentagemDeUso
+
+                        BeatFavorito.innerHTML = `${nome}`;
+                        PorcentagemBeatFavorito.innerHTML = `${PorcentagemDeUso}%  dos usuarios escolhem esse tempo`;
+                    })
+                }
+                else {
+                    BeatFavorito.innerHTML = 'Não localizado';
+                    PorcentagemBeatFavorito.innerHTML = 'Não localizado';
+                }
+            })
+
+
+            await fetch('/rank/CaptarUsuariosComMaisTreinos').then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+                        console.log(resposta)
+
+                        function adicionarUsuarioNoRank(i, nome, qtdTreinos, idPodio) {
+                            console.log(idPodio.length)
+                                return usuarioRanksa.innerHTML += `
+                                <div class="BoxUsuarios">
+                                    <p><span ${idPodio}>${i}</span> ${nome} - ${qtdTreinos} treinos</p>
+                                </div>
+                            `;
+                        }
+
+                        for (let i = 0; i < resposta.length; i++) {
+                            let podio = ''
+                            if(i == 0) {
+                                podio = 'id="PrimeiroLugar"';
+                            } else if (i == 1) {
+                                podio = 'id="SegundoLugar"';
+                            } else if (i == 2) {
+                                podio = 'id="TerceiroLugar"';
+                            }
+
+                            adicionarUsuarioNoRank(i + 1, resposta[i].nome, resposta[i].quantidadeTreinos, podio);
+                        }
+                    })
+                }
+            })
+        }
+    </script>
+</html>

@@ -1,0 +1,96 @@
+body {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+        url(../assets/imgs/BannerInicial.png);
+    background-size: cover;
+    color: white;
+}
+
+.PrimeiraSecao {
+    padding-top: 30px;
+    display: flex;
+    width: 90%;
+    padding: 30px 20px 0 20px;
+    justify-self: center;
+}
+
+.PrimeiraSecaoEsquerda {
+    border-right: 1px solid rgb(255, 255, 255);
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.BoxKpi {
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.BoxKpi h1 {
+    font-size: 30px;
+    padding: 0 10px 0 10px;
+}
+
+.BoxKpi h1 span {
+    color: #DB2602;
+}
+
+.BoxKpi .descricoes {
+    font-size: 25px;
+    display: flex;
+    gap: 15%;
+    padding: 0 10px 0 10px;
+}
+
+.BoxKpi .descricoes p:nth-child(1) {
+    font-weight: bolder;
+    width: 22%;
+    text-align: center;
+}
+
+.PrimeiraSecaoDireita {
+    width: 35%;
+    padding-left: 10px;
+}
+
+.PrimeiraSecaoDireita h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.usuariosRanks {
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+}
+
+.BoxUsuarios {
+    border-bottom: 1px solid rgb(255, 255, 255);
+    padding-right: 40px;
+    display: flex;
+    height: 50px;
+    width: 80%;
+}
+
+.BoxUsuarios p {
+    font-size: 25px;
+}
+
+#PrimeiroLugar {
+    color: #D3AF37;
+}
+
+#SegundoLugar {
+    color: #C0C0C0;
+}
+
+#TerceiroLugar {
+    color: #CD7F32;
+}
+
