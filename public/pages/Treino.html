@@ -76,7 +76,7 @@
         <p class="selects_titulo">SELECIONAR BEAT</p>
         <select id="slt_BeatDeTreino">
           <option value="Lean Back">Lean Back</option>
-          <option value="Detroit Type Beat">Detroit Type Beat</option>
+          <option value="Barras e Barras">Barras e Barras</option>
           <option value="Boom">Boom</option>
         </select>
         <p>Instrumental de músicas</p>
@@ -101,16 +101,7 @@
             </div>
           </div>
           <div class="exibicao_musica">
-            <iframe 
-              id="id_PlayerSpotify"
-              style="border-radius:12px" 
-              src="" 
-              width="100%" 
-              height="100%" 
-              frameBorder="0" 
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-              loading="lazy">
-            </iframe>
+              <audio id="id_mp3" style="border: 2px solid black;  border-radius: 30px; width: 300px;" src="" controls></audio>
           </div>
         </div>
         <div class="PalavraModo">
@@ -154,7 +145,7 @@
   <script>
     async function ComecarTreino() {
       BoxPalavrasPassadas.innerHTML = '';
-      id_buttonComecar.disabled = true
+      id_buttonComecar.disabled = true;
       aguardar();
       
       let ModoNome = slt_ModoDeTreino.value;
@@ -182,7 +173,7 @@
         if(resposta.ok) {
           resposta.json().then(function (resposta) {
             let url = resposta[0].beaturl;
-            id_PlayerSpotify.src = `${resposta[0].beaturl}`;
+            id_mp3.src = `../assets/beats/${resposta[0].beaturl}.mp3`;
             credenciaisRegistros[0].idBeatTreino = resposta[0].idBeatTreino;
           })
         } else {
@@ -219,6 +210,9 @@
       })
       finalizarAguardar();
 
+      id_mp3.play();
+      id_mp3.volume = 0.25;
+
       treinoDinamico.style.display = 'flex';
 
       const timer = setInterval(() => {
@@ -230,7 +224,8 @@
           BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
         }
         if (TempoDeTreino <= 0) {
-          id_buttonComecar.disabled = false
+          id_buttonComecar.disabled = false;
+          id_mp3.pause();
 
           fetch("/treino/RegistrarTreino", {
             method: "POST",
