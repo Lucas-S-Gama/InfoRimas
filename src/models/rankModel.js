@@ -109,10 +109,28 @@ function CaptarUsuariosComMaisTreinos() {
     return database.executar(instrucaoSql);
 }
 
+function CaptarHistoricoSeteDiasUser(nome) {
+        console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente.")
+        var instrucaoSql = `
+        SELECT
+            COUNT(u.idUsuario) AS QuantidadeDeTreinosPorDia,
+            u.nome AS nome,
+            DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
+            FROM usuario u
+            LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
+            WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = '${nome}' 
+            GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
+        ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y');
+        `;
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);   
+}
+
 
 module.exports = {
     CaptarModoFavorito,
     CaptarTempoFavorito,
     CaptarBeatFavorito,
-    CaptarUsuariosComMaisTreinos
+    CaptarUsuariosComMaisTreinos,
+    CaptarHistoricoSeteDiasUser
 }

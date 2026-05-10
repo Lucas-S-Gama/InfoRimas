@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>InfoRimas | Rank</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="../assets/icon/LogoInfoRimasVermelha.png" type="image/x-icon">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/rank.css">
+    <link rel="stylesheet" href="../css/footer.css">
 
     <script src="../js/sessao.js"></script>
 </head>
@@ -53,8 +55,39 @@
             </div>
         </div>
     </section>
+    <section class="graficosUsuario">
+        <h1>Quantidade de treinos feitos por dia  <span id="MostrarNomeUsuario"></span></h1>
+        <div>
+            <canvas id="ipt_graficoFrequencia"></canvas>
+        </div>
+    </section>
+    <footer class="Footer">
+        <img src="../assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
+        <div class="FooterContatos">
+            <h1>Contatos</h1>
+            <p>Telefone: (xx) - XXXXX-XXXX</p>
+            <p>Email: email@example.com</p>
+        </div>
+        <div class="FooterPaginas">
+            <h1>Páginas</h1>
+            <div class="FooterPaginasLinks">
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="login.html">Login</a></li>
+                </ul>
+                <ul>
+                    <li><a href="cadastro.html">Cadastro</a></li>
+                    <li><a href="sobrenos.html">Sobre nós</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
     <script>
+        let nome_do_usuario = sessionStorage.NOME_USUARIO;
+        MostrarNomeUsuario.innerHTML = `(${nome_do_usuario})`;
+        
+
         async function CarregarInfos() {
             
 
@@ -83,7 +116,7 @@
                         let PorcentagemDeUso = resposta[0].PorcentagemDeUso
 
                         TempoFavorito.innerHTML = `${tempo_segundos}s`;
-                        PorcentagemTempoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios utilizam esse beat`;
+                        PorcentagemTempoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios utilizam esse tempo`;
                     })
                 }
                 else {
@@ -100,7 +133,7 @@
                         let PorcentagemDeUso = resposta[0].PorcentagemDeUso
 
                         BeatFavorito.innerHTML = `${nome}`;
-                        PorcentagemBeatFavorito.innerHTML = `${PorcentagemDeUso}%  dos usuarios escolhem esse tempo`;
+                        PorcentagemBeatFavorito.innerHTML = `${PorcentagemDeUso}%  dos usuarios escolhem esse beat`;
                     })
                 }
                 else {
@@ -113,10 +146,7 @@
             await fetch('/rank/CaptarUsuariosComMaisTreinos').then(function (resposta) {
                 if(resposta.ok) {
                     resposta.json().then(function (resposta) {
-                        console.log(resposta)
-
                         function adicionarUsuarioNoRank(i, nome, qtdTreinos, idPodio) {
-                            console.log(idPodio.length)
                                 return usuarioRanksa.innerHTML += `
                                 <div class="BoxUsuarios">
                                     <p><span ${idPodio}>${i}</span> ${nome} - ${qtdTreinos} treinos</p>
@@ -139,6 +169,105 @@
                     })
                 }
             })
+        
+            await fetch(`/rank/CaptarHistoricoSeteDiasUser/${nome_do_usuario}`).then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+                    console.log(resposta)
+
+                    const DadosDias = [];
+                    const DadosQuantidade= [];
+                    let VerificadoEspacoBranco = false;
+
+                    for (let i = 0; i < resposta.length; i++) {
+                        
+                        
+                        if(resposta.length < 7 && VerificadoEspacoBranco == false) {
+                            for (let i = 0; i < (7 - (resposta.length)); i++) {
+                                DadosQuantidade.push(0);                                                         
+                            }
+                            for (let i = 0; i < (7 - (resposta.length)); i++) {
+                                DadosDias.push('Dia Sem Treino');                                                         
+                            }
+                            VerificadoEspacoBranco =  true;
+                        }
+                        DadosDias.push(resposta[i].DataRealizadoTreinos)
+                        DadosQuantidade.push(resposta[i].QuantidadeDeTreinosPorDia)                         
+                    }
+
+                    console.log(DadosDias)
+                    console.log(DadosQuantidade)
+
+                    let GraficoFrequencia = document.getElementById('ipt_graficoFrequencia');
+
+
+                    new Chart(GraficoFrequencia, {
+                        type: 'line',
+                        data: {
+                            labels: DadosDias,
+                            datasets: [{
+                                label: 'Frequência',
+                                data: DadosQuantidade,
+                                backgroundColor: 'red',
+                                borderColor: 'white',
+                                fill: false,
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 1,
+                                        precision: 0,
+                                        color: 'white',
+                                    },
+                                    grid: {
+                                        color: 'white'
+                                    }
+                                },
+                                x: {
+                                    ticks:{
+                                    color: 'white',
+                                    },
+                                    title: {
+                                        display: true,
+                                        text: 'Últimos sete dias com no mínimo 1 treino realizado',
+                                        color: 'white', 
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    })
+                }
+            })
+        
+
+
         }
     </script>
 </html>

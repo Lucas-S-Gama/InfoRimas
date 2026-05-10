@@ -24,9 +24,18 @@ function CaptarUsuariosComMaisTreinos(req, res) {
     });
 }
 
+function CaptarHistoricoSeteDiasUser(req, res) {
+    var nome = req.params.nome;
+
+    rankModel.CaptarHistoricoSeteDiasUser(nome).then((resultado) => {
+        res.status(200).json(resultado)
+    })
+}
+
 module.exports = {
     CaptarModoFavorito,
     CaptarTempoFavorito,
     CaptarBeatFavorito,
-    CaptarUsuariosComMaisTreinos
+    CaptarUsuariosComMaisTreinos,
+    CaptarHistoricoSeteDiasUser
 }

@@ -19,4 +19,8 @@ router.get("/CaptarUsuariosComMaisTreinos" , function(req, res) {
     rankController.CaptarUsuariosComMaisTreinos(req, res);
 })
 
+router.get("/CaptarHistoricoSeteDiasUser/:nome", function(req,res) {
+    rankController.CaptarHistoricoSeteDiasUser(req, res)
+})
+
 module.exports = router;

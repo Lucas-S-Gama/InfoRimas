@@ -1,15 +1,16 @@
 body {
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-        url(../assets/imgs/BannerInicial.png);
-    background-size: cover;
     color: white;
+    background-color: black;
 }
 
 .PrimeiraSecao {
+    background-image:
+    linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url(../assets/imgs/BannerInicial.png);
+    background-size: cover;
     padding-top: 30px;
     display: flex;
-    width: 90%;
+    width: 100%;
     padding: 30px 20px 0 20px;
     justify-self: center;
 }
@@ -94,3 +95,33 @@ body {
     color: #CD7F32;
 }
 
+.graficosUsuario {
+    margin-top: 30px;
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    width: 100%;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+.graficosUsuario h1{
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.graficosUsuario div {
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    width: 90%;
+    height: 300px;
+}
+
+.graficosUsuario canvas {
+    padding: 10px;
+    border: 1px solid white;
+}

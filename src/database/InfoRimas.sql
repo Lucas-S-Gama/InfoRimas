@@ -44,9 +44,9 @@ CREATE TABLE BeatTreino (
 );
 
 INSERT INTO BeatTreino (nome, beaturl) VALUES
-('Lean Back', 'https://open.spotify.com/embed/track/2yR5drSnVpZKi08ibb3gIP?utm_source=generator'),
-('Detroit Type Beat', 'https://open.spotify.com/embed/track/259o0GhHtb97pGbwIxSKLY?utm_source=generator'),
-('Boom', 'https://open.spotify.com/embed/track/0nbhwvRYCcLWPBCFdLv6Ov?utm_source=generator&theme=0');
+('Lean Back', 'Lean_Back'),
+('Barras e Barras', 'Barras_e_Barras'),
+('Boom', 'Boom');
 
 CREATE TABLE RegistroTreino (
 	idRegistroTreino INT PRIMARY KEY AUTO_INCREMENT,
@@ -68,7 +68,16 @@ SELECT nome, descricao, tempoPorPalavra FROM ModoTreino WHERE nome = 'Easy Mode'
 SELECT tempo_segundos FROM TempoTreino WHERE tempo_segundos = 45;
 
 INSERT INTO RegistroTreino (fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_BeatTreino) VALUES 
-(3, 1, 2, 1);
+(3, 1, 2, 3);
+
+INSERT INTO RegistroTreino (fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_BeatTreino, dt_hora) VALUES 
+(1, 1, 1, 1, '2026-05-10 10:00:00'),
+(1, 1, 1, 1, '2026-05-09 14:30:00'),
+(1, 1, 1, 1, '2026-05-08 09:15:00'),
+(1, 1, 1, 1, '2026-05-07 18:00:00'),
+(1, 1, 1, 1, '2026-05-06 07:45:00'),
+(1, 1, 1, 1, '2026-05-05 20:20:00'),
+(1, 1, 1, 1, '2026-05-04 11:10:00');
 
 -- =====================================================================
 -- =========> Mostrando todos os registros de treino <=======
@@ -179,5 +188,31 @@ FROM usuario u
 JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
 GROUP BY u.nome
 ORDER BY quantidadeTreinos DESC LIMIT 5;
+
+
+-- =====================================================================
+-- =========> Quantidade de treinos feitos por dia <=======
+-- =====================================================================
+SELECT
+	COUNT(u.idUsuario) AS QuantidadeDeTreinosPorDia,
+	u.nome AS nome,
+	DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
+	FROM usuario u
+	LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
+	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'lucas' 
+	GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
+ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') DESC;
+
+SELECT 
+    COUNT(u.idUsuario) AS QuantidadeDeTreinosPorDia,
+    u.nome AS nome,
+    DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
+FROM usuario u
+LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
+WHERE rt.dt_hora >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) 
+  AND u.nome = 'lucas'
+GROUP BY u.nome, rt.dt_hora
+ORDER BY rt.dt_hora DESC;
+
 
 
