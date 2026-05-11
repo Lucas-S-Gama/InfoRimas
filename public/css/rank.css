@@ -9,7 +9,7 @@ body {
     url(../assets/imgs/BannerInicial.png);
     background-size: cover;
     padding-top: 30px;
-    display: flex;
+    display: none;
     width: 100%;
     justify-self: center;
 }
@@ -122,4 +122,8 @@ body {
 .graficosUsuario canvas {
     padding: 10px;
     border: 1px solid white;
+}
+
+#SemTreinoMensagem {
+    font-size: 50px;
 }

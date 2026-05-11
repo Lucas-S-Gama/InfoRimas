@@ -25,7 +25,10 @@
             <a href="../index.html">Sair</a>
         </div>
     </header>
-    <section class="PrimeiraSecao">
+    <div id="div_aguardar" style="width: 250px; display: none; justify-self: center;">
+        <img src="../assets/loader-bola.gif" id="loading-gif" style="width: 100%;"/>
+    </div>
+    <section class="PrimeiraSecao" id="PrimeiraSecao">
         <div class="PrimeiraSecaoEsquerda">
             <div class="BoxKpi">
                 <h1><span>Modo</span> de treino preferido entre os usuários</h1>
@@ -56,9 +59,10 @@
         </div>
     </section>
     <section class="graficosUsuario">
-        <h1>Quantidade de treinos feitos por dia  <span id="MostrarNomeUsuario"></span></h1>
-        <div>
+        <h1>Quantidade de treinos nos ultimos dias treinados <span id="MostrarNomeUsuario"></span></h1>
+        <div id="div_Grafico">
             <canvas id="ipt_graficoFrequencia"></canvas>
+            <p id="SemTreinoMensagem"></p>
         </div>
     </section>
     <footer class="Footer">
@@ -87,9 +91,8 @@
         let nome_do_usuario = sessionStorage.NOME_USUARIO;
         MostrarNomeUsuario.innerHTML = `(${nome_do_usuario})`;
         
-
         async function CarregarInfos() {
-            
+            aguardar();
 
             await fetch('/rank/CaptarModoFavorito').then(function (resposta) {
                 if(resposta.ok) {
@@ -168,10 +171,17 @@
                 if(resposta.ok) {
                     resposta.json().then(function (resposta) {
                     console.log(resposta)
-
+                    let GraficoFrequencia = document.getElementById('ipt_graficoFrequencia');
                     const DadosDias = [];
                     const DadosQuantidade= [];
                     let VerificadoEspacoBranco = false;
+
+                    if (resposta.length < 1) {
+                        ipt_graficoFrequencia.style.display = 'none';
+                        div_Grafico.style.height = '100px'
+                        SemTreinoMensagem.innerHTML = 'NENHUM TREINO REGISTRADOS NESSA CONTA'
+                        return;
+                    }
 
                     for (let i = 0; i < resposta.length; i++) {
                         
@@ -192,7 +202,6 @@
                     console.log(DadosDias)
                     console.log(DadosQuantidade)
 
-                    let GraficoFrequencia = document.getElementById('ipt_graficoFrequencia');
 
 
                     new Chart(GraficoFrequencia, {
@@ -241,27 +250,13 @@
                             }
                         }
                     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                     })
                 }
             })
         
 
-
+            finalizarAguardar();
+            PrimeiraSecao.style.display = 'flex';
         }
     </script>
 </html>
