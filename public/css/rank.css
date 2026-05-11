@@ -41,13 +41,12 @@ body {
 .BoxKpi .descricoes {
     font-size: 25px;
     display: flex;
-    gap: 15%;
     padding: 0 10px 0 10px;
 }
 
-.BoxKpi .descricoes p:nth-child(1) {
+.BoxKpi .descricoes p {
     font-weight: bolder;
-    width: 22%;
+    width: 100%;
     text-align: center;
 }
 

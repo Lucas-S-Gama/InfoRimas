@@ -31,21 +31,21 @@
                 <h1><span>Modo</span> de treino preferido entre os usuários</h1>
                 <div class="descricoes">
                     <p id="ModoFavorito"></p>
-                    <p id="PorcentagemModoFavorito"></p>
                 </div>
             </div>
+            <hr>
             <div class="BoxKpi">
                 <h1><span>Tempo</span> de treino popular entre os usuários</h1>
                 <div class="descricoes">
                     <p id="TempoFavorito"></p>
-                    <p id="PorcentagemTempoFavorito"></p>
+                    <!-- <p id="PorcentagemTempoFavorito"></p> -->
                 </div>
             </div>
+            <hr>
             <div class="BoxKpi">
                 <h1><span>Beat</span> de treino mais utilizado entre os usuários</h1>
                 <div class="descricoes">
                     <p id="BeatFavorito"></p>
-                    <p id="PorcentagemBeatFavorito"></p>
                 </div>
             </div>
         </div>
@@ -98,13 +98,11 @@
                         let nome = resposta[0].nome
                         let PorcentagemDeUso = resposta[0].PorcentagemDeUso
 
-                        ModoFavorito.innerHTML = `${nome}`;
-                        PorcentagemModoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios preferem esse modo`;
+                        ModoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios preferem o modo <b>${nome}</b>`;
                     })
                 }
                 else {
                     ModoFavorito.innerHTML = 'Não localizado';
-                    PorcentagemModoFavorito.innerHTML = 'Não localizado';
                 }
             })
 
@@ -115,13 +113,11 @@
                         let tempo_segundos = resposta[0].tempo_segundos
                         let PorcentagemDeUso = resposta[0].PorcentagemDeUso
 
-                        TempoFavorito.innerHTML = `${tempo_segundos}s`;
-                        PorcentagemTempoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios utilizam esse tempo`;
+                        TempoFavorito.innerHTML = `${PorcentagemDeUso}% dos usuarios utilizam <b>${tempo_segundos}s</b> de tempo`;
                     })
                 }
                 else {
                     TempoFavorito.innerHTML = 'Não localizado';
-                    PorcentagemTempoFavorito.innerHTML = 'Não localizado';
                 }
             })
 
@@ -132,13 +128,11 @@
                         let nome = resposta[0].nome
                         let PorcentagemDeUso = resposta[0].PorcentagemDeUso
 
-                        BeatFavorito.innerHTML = `${nome}`;
-                        PorcentagemBeatFavorito.innerHTML = `${PorcentagemDeUso}%  dos usuarios escolhem esse beat`;
+                        BeatFavorito.innerHTML = `${PorcentagemDeUso}%  dos usuarios escolhem <b>${nome}</b> no beat`;
                     })
                 }
                 else {
                     BeatFavorito.innerHTML = 'Não localizado';
-                    PorcentagemBeatFavorito.innerHTML = 'Não localizado';
                 }
             })
 
