@@ -71,7 +71,7 @@ INSERT INTO RegistroTreino (fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_Beat
 (3, 1, 2, 3);
 
 INSERT INTO RegistroTreino (fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_BeatTreino, dt_hora) VALUES 
-(1, 1, 1, 1, '2026-05-10 10:00:00'),
+(5, 1, 1, 1, '2026-05-10 10:00:00'),
 (1, 1, 1, 1, '2026-05-09 14:30:00'),
 (1, 1, 1, 1, '2026-05-08 09:15:00'),
 (1, 1, 1, 1, '2026-05-07 18:00:00'),
@@ -199,20 +199,9 @@ SELECT
 	DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
 	FROM usuario u
 	LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
-	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'lucas' 
+	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'bea' 
 	GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
-ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') DESC;
-
-SELECT 
-    COUNT(u.idUsuario) AS QuantidadeDeTreinosPorDia,
-    u.nome AS nome,
-    DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
-FROM usuario u
-LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
-WHERE rt.dt_hora >= DATE_SUB(CURRENT_DATE, INTERVAL 7 DAY) 
-  AND u.nome = 'lucas'
-GROUP BY u.nome, rt.dt_hora
-ORDER BY rt.dt_hora DESC;
+ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y');
 
 
 
