@@ -224,6 +224,7 @@
           BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
         }
         if (TempoDeTreino <= 0) {
+          id_buttonComecar.innerHTML = 'Treinar denovo!';
           id_buttonComecar.disabled = false;
           id_mp3.pause();
 

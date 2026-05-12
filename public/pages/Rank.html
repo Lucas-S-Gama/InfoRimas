@@ -36,7 +36,6 @@
                     <p id="ModoFavorito"></p>
                 </div>
             </div>
-            <hr>
             <div class="BoxKpi">
                 <h1><span>Tempo</span> de treino popular entre os usuários</h1>
                 <div class="descricoes">
@@ -44,7 +43,6 @@
                     <!-- <p id="PorcentagemTempoFavorito"></p> -->
                 </div>
             </div>
-            <hr>
             <div class="BoxKpi">
                 <h1><span>Beat</span> de treino mais utilizado entre os usuários</h1>
                 <div class="descricoes">
@@ -146,7 +144,7 @@
                         function adicionarUsuarioNoRank(i, nome, qtdTreinos, idPodio) {
                                 return usuarioRanksa.innerHTML += `
                                 <div class="BoxUsuarios">
-                                    <p><span ${idPodio}>${i}</span> ${nome} - ${qtdTreinos} treinos</p>
+                                    <p><span class="NumerosPodio" ${idPodio}>${i}º</span> ${nome} - ${qtdTreinos} treinos</p>
                                 </div>
                             `;
                         }
@@ -159,6 +157,8 @@
                                 podio = 'id="SegundoLugar"';
                             } else if (i == 2) {
                                 podio = 'id="TerceiroLugar"';
+                            } else {
+                                podio = 'id="ForaDoPodio"';
                             }
 
                             adicionarUsuarioNoRank(i + 1, resposta[i].nome, resposta[i].quantidadeTreinos, podio);
@@ -214,6 +214,8 @@
                                 backgroundColor: 'red',
                                 borderColor: 'white',
                                 fill: false,
+                                borderColor: '#DB2602',
+                                pointBackgroundColor: '#FFFFFF',
                                 tension: 0.1
                             }]
                         },
@@ -227,7 +229,7 @@
                             },
                             scales: {
                                 y: {
-                                    beginAtZero: true,
+                                    beginAtZero: false,
                                     ticks: {
                                         stepSize: 1,
                                         precision: 0,

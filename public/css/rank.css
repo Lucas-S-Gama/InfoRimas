@@ -19,13 +19,20 @@ body {
     width: 65%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 20px;
 }
 
 .BoxKpi {
     height: 150px;
+    width: 90%;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: rgba(45, 45, 45, 0.5);
+    box-shadow: 3px 3px 3px 0px rgba(219, 38, 2, 1);
     gap: 30px;
 }
 
@@ -93,6 +100,10 @@ body {
     color: #CD7F32;
 }
 
+#ForaDoPodio {
+    color: #DB2602;
+}
+
 .graficosUsuario {
     margin-top: 30px;
     padding-top: 50px;
@@ -126,4 +137,10 @@ body {
 
 #SemTreinoMensagem {
     font-size: 50px;
+}
+
+.NumerosPodio {
+    font-weight: bolder;
+    font-size: 40px;
+    padding-right: 20px;
 }
