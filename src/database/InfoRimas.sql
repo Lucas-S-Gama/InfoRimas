@@ -59,7 +59,7 @@ CREATE TABLE RegistroTreino (
 
 SELECT tempoPorPalavra FROM ModoTreino;
 
-SELECT * FROM usuario;
+SELECT * FROM usuari3o;
 
 SELECT beaturl FROM BeatTreino WHERE nome = 'Lean Back';
 
