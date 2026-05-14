@@ -69,7 +69,8 @@ body {
     cursor: pointer;
     font-size: 40px;
     background-color: transparent;
-    appearance: none;
+    border: 1px solid black;
+    border-radius: 10px;
     text-align: center;
     transition: 0.5s;
     font-family: "Barlow Condensed", sans-serif;
@@ -78,6 +79,8 @@ body {
 
 .selecionar_box div select:hover {
     color: #DB2602;
+    border-color: #DB2602;
+    background-color: black;
 }
 
 .selecionar_box div option {

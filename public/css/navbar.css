@@ -1,0 +1,20 @@
+.barraNavegacao {
+    background-color: black;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15%;
+}
+
+.barraNavegacao a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 17px;
+    transition: 0.5s;
+}
+
+.barraNavegacao a:hover {
+        rotate: 5deg;
+        color: #DB2602;
+}

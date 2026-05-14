@@ -77,7 +77,6 @@ body {
 }
 
 .BoxUsuarios {
-    /* border-bottom: 1px solid rgb(255, 255, 255); */
     background-color: rgba(45, 45, 45, 0.5);
     box-shadow: 3px 3px 3px 0px rgba(219, 38, 2, 1);
     border-radius: 10px;

@@ -1,0 +1,79 @@
+body {
+    background-color: black;
+}
+
+.conteudoDaPágina {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-image:
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    url(../assets/imgs/prototipoFundo.png);
+    position: relative;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.BoxConteudo {
+    display: flex;
+    /* border: 1px solid black; */
+    height: 150px;
+    align-items: center;
+    justify-content: space-between;
+    width: 90%;
+}
+
+.BoxTitulo {
+    /* border: 1px solid black; */
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+    height: 100%;
+    border-radius: 0 10px 10px 10px;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: -10px -10px 3px 0px rgb(219, 38, 2);
+}
+
+.BoxTitulo p {
+    color: #DB2602;
+    font-weight: bolder;
+    font-size: 50px;
+}
+
+.BoxDescricao {
+    width: 50%;
+    height: 90%;
+    width: 50%;
+    font-size: 23px;
+    padding: 15px;
+    border-radius: 10px 10px 0 10px;
+    text-align: justify;
+    background-color: rgba(0, 0, 0, 0.9);
+    box-shadow: 10px 10px 3px 0px rgb(219, 38, 2);
+}
+
+.BoxDescricao {
+    color: #FFFFFF;
+}
+
+
+.BoxInvertido {
+    flex-direction: row-reverse;
+}
+
+.BoxTituloInvertido {
+    box-shadow: 10px 10px 3px 0px rgb(219, 38, 2);
+    border-radius: 10px 10px 0px 10px;
+}
+
+
+.BoxDescricaoInvertido {
+    border-radius: 0px 10px 10 10px;
+    box-shadow: -10px -10px 3px 0px rgb(219, 38, 2);
+}
+
+

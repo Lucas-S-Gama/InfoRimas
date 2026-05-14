@@ -28,14 +28,13 @@ INSERT INTO ModoTreino (nome, descricao, tempoPorPalavra) VALUES
 
 CREATE TABLE TempoTreino (
 	idTempoTreino INT PRIMARY KEY AUTO_INCREMENT,
-	tempo_segundos INT NOT NULL UNIQUE,
-	descricao VARCHAR(200) NOT NULL
+	tempo_segundos INT NOT NULL UNIQUE
 );
 
-INSERT INTO TempoTreino (tempo_segundos, descricao) VALUES
-(30, 'Duração total de 30 segundos'),
-(45, 'Duração total de 45 segundos'),
-(60, 'Duração total de 60 segundos');
+INSERT INTO TempoTreino (tempo_segundos) VALUES
+(30),
+(45),
+(60);
 
 CREATE TABLE BeatTreino (
 	idBeatTreino INT PRIMARY KEY AUTO_INCREMENT,
