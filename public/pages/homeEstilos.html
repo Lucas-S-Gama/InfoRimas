@@ -9,8 +9,10 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/homeEstilos.css">
     <link rel="stylesheet" href="../css/footer.css">
+
+    <script src="../js/sessao.js"></script>
 </head>
-<body>
+<body onload="CarregarEstilos()">
     <header class="Header">
         <div class="header_esquerda">
             <img src="../assets/icon/LogoInfoRimasPreta.png" alt="LogoPreta">
@@ -28,6 +30,12 @@
         <a href="./homeDicionario.html">Dicionario do Rap</a>
         <a href="./homeEstilos.html">Estilos de rima</a>
     </nav>
+    <div id="div_aguardar" style="width: 250px; display: none; justify-self: center;">
+        <img src="../assets/loader-bola.gif" id="loading-gif" style="width: 100%;"/>
+    </div>
+    <section class="SecaoEstilos" id="LayoutBoxs">
+
+    </section>
 
     <footer class="Footer">
         <img src="../assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
@@ -51,4 +59,47 @@
         </div>
     </footer>
 </body>
+    <script>
+        async function CarregarEstilos() {
+            aguardar();
+
+            await fetch('/estilos/CaptarEstilos').then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        for (let i = 0; i < resposta.length; i++) {
+
+                            if (i % 2 == 0) {
+                            LayoutBoxs.innerHTML += `
+                            <div class="Box">
+                                <div class="BoxEsquerda">
+                                    <p class="titulo">${resposta[i].nome}</p>
+                                    <p class="descricao">${resposta[i].descricao}</p>
+                                </div>
+                                <div class="BoxDireita">
+                                    <iframe width="100%" height="100%" src="${resposta[i].url}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            `
+                            } else {
+                            LayoutBoxs.innerHTML += `
+                            <div class="Box BoxInvertida">
+                                <div class="BoxEsquerda">
+                                    <p class="titulo">${resposta[i].nome}</p>
+                                    <p class="descricao">${resposta[i].descricao}</p>
+                                </div>
+                                <div class="BoxDireita">
+                                    <iframe width="100%" height="100%" src="${resposta[i].url}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                            </div>
+                            `
+                            }
+                        }
+
+                    })
+                }
+            })
+            finalizarAguardar();
+        }
+    </script>
 </html>

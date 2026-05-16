@@ -5,20 +5,15 @@ body {
 .conteudoDaPágina {
     padding-top: 50px;
     padding-bottom: 50px;
-    background-image:
-    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
-    url(../assets/imgs/prototipoFundo.png);
-    position: relative;
-    background-size: cover;
     display: flex;
     align-items: center;
     flex-direction: column;
     gap: 100px;
+    border-bottom: 1px solid #FFFFFF;
 }
 
 .BoxConteudo {
     display: flex;
-    /* border: 1px solid black; */
     height: 150px;
     align-items: center;
     justify-content: space-between;
@@ -26,7 +21,6 @@ body {
 }
 
 .BoxTitulo {
-    /* border: 1px solid black; */
     text-align: center;
     display: flex;
     justify-content: center;
@@ -35,7 +29,7 @@ body {
     height: 100%;
     border-radius: 0 10px 10px 10px;
     background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: -10px -10px 3px 0px rgb(219, 38, 2);
+    box-shadow: -5px -5px 3px 12px rgb(219, 38, 2);
 }
 
 .BoxTitulo p {
@@ -53,7 +47,7 @@ body {
     border-radius: 10px 10px 0 10px;
     text-align: justify;
     background-color: rgba(0, 0, 0, 0.9);
-    box-shadow: 10px 10px 3px 0px rgb(219, 38, 2);
+    box-shadow: 10px -10px 3px 0px rgb(219, 38, 2);
 }
 
 .BoxDescricao {
@@ -66,8 +60,8 @@ body {
 }
 
 .BoxTituloInvertido {
-    box-shadow: 10px 10px 3px 0px rgb(219, 38, 2);
-    border-radius: 10px 10px 0px 10px;
+    box-shadow: 5px -5px 3px 12px rgb(219, 38, 2);
+    border-radius: 10px 0px 10px 10px;
 }
 
 

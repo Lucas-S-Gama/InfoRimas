@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/navbar.css">
     <link rel="stylesheet" href="../css/homeDicionario.css">
     <link rel="stylesheet" href="../css/footer.css">
+
+    <script src="../js/sessao.js"></script>
 </head>
 <body onload="CarregarTermos()">
     <header class="Header">
@@ -28,6 +30,9 @@
         <a href="./homeDicionario.html">Dicionario do Rap</a>
         <a href="./homeEstilos.html">Estilos de rima</a>
     </nav>
+    <div id="div_aguardar" style="width: 250px; display: none; justify-self: center;">
+        <img src="../assets/loader-bola.gif" id="loading-gif" style="width: 100%;"/>
+    </div>
     <section class="secaoPalavras">
         <div class="TituloSecao">
             <p>Gírias/Termos mais utilizados nas batalhas</p>
@@ -63,12 +68,11 @@
     <script>
 
         async function CarregarTermos() {
+            aguardar();
+                        
             await fetch('/termos/CaptarTermos').then(function (resposta) {
                 if(resposta.ok) {
                     resposta.json().then(function (resposta) {
-
-                        let nome = resposta[0].nome
-                        let PorcentagemDeUso = resposta[0].PorcentagemDeUso;
 
                         for (let i = 0; i < resposta.length; i++) {
                             LayoutBoxs.innerHTML += `
@@ -86,6 +90,7 @@
                     })
                 }
             })
+            finalizarAguardar();
         }
     </script>
 </html>

@@ -1,0 +1,56 @@
+body {
+    background-color: black;
+}
+
+.SecaoEstilos {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+    border-bottom: 1px solid #FFFFFF;
+}
+
+.Box {
+    display: flex;
+    background-color: black;
+    width: 80%;
+    color: white;
+    height: 300px;
+    padding: 20px;
+    gap: 10%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px 5px rgb(219, 38, 2);
+}
+
+.BoxInvertida {
+    flex-direction: row-reverse;
+}
+
+.BoxEsquerda {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 20px;
+    gap: 30px;
+    width: 50%;
+}
+
+.BoxDireita {
+    width: 50%;
+    
+}
+
+.titulo {
+    color: #DB2602;
+    font-weight: bolder;
+    font-size: 45px;
+}
+
+.descricao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+}

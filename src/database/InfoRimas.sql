@@ -63,20 +63,35 @@ descricao VARCHAR(200)
 );
 
 INSERT INTO termos (nome, descricao) VALUES
-('Drop no Beat', 'É o momento onde o beat vira. Foi a maior tendência em 2023, popularizado pelo Brennuz.'),
+('DROP NO BEAT', 'É o momento onde o beat vira. Foi a maior tendência em 2023, popularizado pelo Brennuz.'),
 ('MVP', 'Most Valuable Player. MC que mais se destacou ou teve o melhor desempenho em um evento ou batalha.'),
 ('PUNCHLINE', 'A linha de impacto no final de uma rima que causa forte reação do público e pontua contra o oponente.'),
 ('DECORADA', 'Rima que já estava pronta ou decorada pelo MC antes da batalha, em vez de ser feita na hora.'),
-('TWOLALA', 'Formato de rima rápida alternada entre dois MCs, geralmente rimando de dois em dois versos.'),
+('TWOLALA', 'Resultado da batalha quando um dos MCs ganha de 2 a 0 contra outro MC'),
 ('FREESTYLE', 'Estilo livre. A arte de rimar de forma totalmente improvisada no momento exato em que a batida toca.'),
-('Dobra', 'Técnica de encaixar duas palavras ou sílabas tônicas no mesmo compasso para acelerar ou variar o fluxo.'),
+('DOBRA', 'Técnica de encaixar duas palavras ou sílabas tônicas no mesmo compasso para acelerar ou variar o fluxo.'),
 ('FLOW', 'A maneira como o MC flui na batida, combinando o ritmo das palavras com a cadência do instrumental.'),
 ('IMPROVISADA', 'Rima criada no calor do momento, baseada nos acontecimentos atuais e no que o oponente acabou de dizer.'),
 ('FATALITY', 'Uma punchline ou rima devastadora que encerra o argumento e praticamente define a vitória na batalha.'),
 ('IDEOLOGIA', 'Estilo de batalha ou rima focado em temas conscientes, debates sociais, filosóficos e políticos.'),
-('BATA-VOLTA', 'Formato de batalha rápido onde cada MC rima um verso curto e o outro responde imediatamente a seguir.'),
+('BATE-VOLTA', 'Formato de batalha rápido onde cada MC rima um verso curto e o outro responde imediatamente a seguir.'),
 ('GASTAÇÃO', 'Estilo de rima focado em zoar, debochar ou fazer piadas ácidas sobre a aparência e postura do oponente.'),
 ('60 SEGUNDOS', 'O tempo padrão tradicional de um round (um minuto) concedido para cada MC apresentar suas rimas.');
+
+CREATE TABLE estilos (
+idEstilos INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+descricao VARCHAR(200),
+url VARCHAR(200)
+);
+
+INSERT INTO estilos (nome, descricao, url) VALUES 
+('SPEEDFLOW', 'Estilo focado na velocidade máxima da entrega das palavras dentro do ritmo.', 'https://www.youtube-nocookie.com/embed/D644IdO584s?si=mruhXUKiPkrXfrGQ&amp;controls=0&amp;start=136'), 
+('DROP NO BEAT', 'Estilo que sincroniza o ápice da rima com a virada ou queda da batida.', 'https://www.youtube-nocookie.com/embed/e8nSBGE7eo8?si=vv8aTZJMEWiYxHas&amp;controls=0&amp;start=310'), 
+('100% FREESTYLE', 'Estilo de improvisação pura e imediata, sem nenhuma estrutura pré-pensada.', 'https://www.youtube-nocookie.com/embed/fpoUiMB4Znk?si=yea0WMdeo_61YNmM&amp;controls=0&amp;start=117'), 
+('FLOW', 'Estilo focado na variação do ritmo, da cadência e da entrega das palavras.', 'https://www.youtube-nocookie.com/embed/fWWbOUZj7QI?si=YlIc9T0xZFMuAf2G&amp;controls=0&amp;start=343'), 
+('DUPLA NORTE', 'Estilo focado na técnica de completar a rima da dupla.', 'https://www.youtube-nocookie.com/embed/-l28J2-x6sg?si=a6_63sxQUNq2lavH&amp;controls=0&amp;start=97'), 
+('AGRESSIVO', 'Estilo focado no ataque direto ao oponente através de linhas impactantes e postura intimidadora.', 'https://www.youtube-nocookie.com/embed/cq2SSxJjeHU?si=2AgZVQC3d9GPQuMo&amp;controls=0&amp;start=292');
 
 
 SELECT tempoPorPalavra FROM ModoTreino;
@@ -221,15 +236,20 @@ SELECT
 	DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
 	FROM usuario u
 	LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
-	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'bea' 
+	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'lucas' 
 	GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
 ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y');
-
 
 -- =====================================================================
 -- =========> todos os termos <=======
 -- =====================================================================
 SELECT nome, descricao FROM termos;
+
+-- =====================================================================
+-- =========> todos os estilos <=======
+-- =====================================================================
+SELECT nome, descricao, url FROM estilos;
+
 
 
 
