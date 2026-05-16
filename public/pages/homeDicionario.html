@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="../css/homeDicionario.css">
     <link rel="stylesheet" href="../css/footer.css">
 </head>
-<body>
+<body onload="CarregarTermos()">
     <header class="Header">
         <div class="header_esquerda">
             <img src="../assets/icon/LogoInfoRimasPreta.png" alt="LogoPreta">
             <p>Info<span>Rimas</span></p>
         </div>
         <div class="header_direita">
-            <a href="home.html">Home</a>
+            <a href="homeTecnicas.html">Home</a>
             <a href="Treino.html">Treino</a>
             <a href="rank.html">Rank</a>
             <a href="../index.html">Sair</a>
@@ -28,6 +28,15 @@
         <a href="./homeDicionario.html">Dicionario do Rap</a>
         <a href="./homeEstilos.html">Estilos de rima</a>
     </nav>
+    <section class="secaoPalavras">
+        <div class="TituloSecao">
+            <p>Gírias/Termos mais utilizados nas batalhas</p>
+            <p>Clique na palavra e veja seu significado</p>
+        </div>
+        <div class="LayoutSecao" id="LayoutBoxs">
+
+        </div>
+    </section>
 
     <footer class="Footer">
         <img src="../assets/icon/LogoInfoRimasVermelha.png" alt="LogoVermelha">
@@ -51,4 +60,32 @@
         </div>
     </footer>
 </body>
+    <script>
+
+        async function CarregarTermos() {
+            await fetch('/termos/CaptarTermos').then(function (resposta) {
+                if(resposta.ok) {
+                    resposta.json().then(function (resposta) {
+
+                        let nome = resposta[0].nome
+                        let PorcentagemDeUso = resposta[0].PorcentagemDeUso;
+
+                        for (let i = 0; i < resposta.length; i++) {
+                            LayoutBoxs.innerHTML += `
+                            <div class="Box">
+                                <div class="BoxFrente">
+                                    <p>${resposta[i].nome}</p>
+                                </div>
+                                <div class="BoxAtras">
+                                    <p>${resposta[i].descricao}</p>
+                                </div>
+                            </div>
+                            `
+                        }
+
+                    })
+                }
+            })
+        }
+    </script>
 </html>

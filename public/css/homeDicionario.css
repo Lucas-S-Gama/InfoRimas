@@ -1,0 +1,91 @@
+body {
+    background-color: black;
+}
+
+.secaoPalavras {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    background-image:
+    linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),
+    url(../assets/imgs/prototipoFundo.png);
+    position: relative;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 70px;
+}
+
+.TituloSecao {
+    color: black;
+    font-weight: bolder;
+    font-size: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.LayoutSecao {
+    width: 60%;
+    gap: 10%;
+    padding-left: 3%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Box {
+    width: 25%;
+    height: 250px;
+    margin-bottom: 50px;
+    background-color: rgba(219, 38, 2, 1);
+    box-shadow: 5px 5px 5px 3px rgb(0, 0, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Box p {
+    color: #FFFFFF;
+}
+
+
+.Box:hover {
+    .BoxFrente {
+        opacity: 0;
+        visibility: hidden;
+    }
+    .BoxAtras {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.BoxFrente {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.BoxFrente p {
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.BoxAtras {
+    position: relative;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    height: 90%;
+    padding: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    text-align: left;
+    transition: 0.5s;
+}
+
+

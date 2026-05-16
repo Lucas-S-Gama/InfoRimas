@@ -56,6 +56,29 @@ CREATE TABLE RegistroTreino (
     dt_hora DATETIME DEFAULT CURRENT_TIMESTAMP()
 );
 
+CREATE TABLE termos (
+idTermos INT PRIMARY KEY AUTO_INCREMENT,
+nome VARCHAR(45),
+descricao VARCHAR(200)
+);
+
+INSERT INTO termos (nome, descricao) VALUES
+('Drop no Beat', 'É o momento onde o beat vira. Foi a maior tendência em 2023, popularizado pelo Brennuz.'),
+('MVP', 'Most Valuable Player. MC que mais se destacou ou teve o melhor desempenho em um evento ou batalha.'),
+('PUNCHLINE', 'A linha de impacto no final de uma rima que causa forte reação do público e pontua contra o oponente.'),
+('DECORADA', 'Rima que já estava pronta ou decorada pelo MC antes da batalha, em vez de ser feita na hora.'),
+('TWOLALA', 'Formato de rima rápida alternada entre dois MCs, geralmente rimando de dois em dois versos.'),
+('FREESTYLE', 'Estilo livre. A arte de rimar de forma totalmente improvisada no momento exato em que a batida toca.'),
+('Dobra', 'Técnica de encaixar duas palavras ou sílabas tônicas no mesmo compasso para acelerar ou variar o fluxo.'),
+('FLOW', 'A maneira como o MC flui na batida, combinando o ritmo das palavras com a cadência do instrumental.'),
+('IMPROVISADA', 'Rima criada no calor do momento, baseada nos acontecimentos atuais e no que o oponente acabou de dizer.'),
+('FATALITY', 'Uma punchline ou rima devastadora que encerra o argumento e praticamente define a vitória na batalha.'),
+('IDEOLOGIA', 'Estilo de batalha ou rima focado em temas conscientes, debates sociais, filosóficos e políticos.'),
+('BATA-VOLTA', 'Formato de batalha rápido onde cada MC rima um verso curto e o outro responde imediatamente a seguir.'),
+('GASTAÇÃO', 'Estilo de rima focado em zoar, debochar ou fazer piadas ácidas sobre a aparência e postura do oponente.'),
+('60 SEGUNDOS', 'O tempo padrão tradicional de um round (um minuto) concedido para cada MC apresentar suas rimas.');
+
+
 SELECT tempoPorPalavra FROM ModoTreino;
 
 SELECT * FROM usuari3o;
@@ -201,6 +224,12 @@ SELECT
 	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'bea' 
 	GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
 ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y');
+
+
+-- =====================================================================
+-- =========> todos os termos <=======
+-- =====================================================================
+SELECT nome, descricao FROM termos;
 
 
 

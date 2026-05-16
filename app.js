@@ -18,7 +18,8 @@ var app = express();
 var indexRouter = require("./src/routes/index");
 var usuarioRouter = require("./src/routes/usuarios");
 var treinoRouter = require("./src/routes/treino");
-var rankRouter = require("./src/routes/rank")
+var rankRouter = require("./src/routes/rank");
+var termosRouter = require("./src/routes/termos");
 
 
 app.use(express.json());
@@ -31,6 +32,7 @@ app.use("/", indexRouter);
 app.use("/usuarios", usuarioRouter);
 app.use("/treino", treinoRouter);
 app.use("/rank", rankRouter);
+app.use("/termos", termosRouter);
 
 
 
