@@ -118,9 +118,10 @@ function CaptarHistoricoSeteDiasUser(nome) {
             DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
             FROM usuario u
             LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
-            WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = '${nome}' 
+            WHERE u.nome = 'lucas' 
             GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
-        ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y');
+        ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') DESC LIMIT 7
+        ;
         `;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);   
