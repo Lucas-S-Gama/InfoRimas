@@ -12,7 +12,7 @@
 
     <script src="../js/sessao.js"></script>
 </head>
-<body onload="CarregarTermos()">
+<body onload="CarregarTermos(), validarSessao()">
     <header class="Header">
         <div class="header_esquerda">
             <img src="../assets/icon/LogoInfoRimasPreta.png" alt="LogoPreta">
@@ -22,7 +22,7 @@
             <a href="homeTecnicas.html">Home</a>
             <a href="Treino.html">Treino</a>
             <a href="rank.html">Rank</a>
-            <a href="../index.html">Sair</a>
+            <a onclick="limparSessao()">Sair</a>
         </div>
     </header>
     <nav class="barraNavegacao">
