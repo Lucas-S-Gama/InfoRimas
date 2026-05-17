@@ -91,8 +91,8 @@ INSERT INTO estilos (nome, descricao, url) VALUES
 ('100% FREESTYLE', 'Estilo de improvisação pura e imediata, sem nenhuma estrutura pré-pensada.', 'https://www.youtube-nocookie.com/embed/fpoUiMB4Znk?si=yea0WMdeo_61YNmM&amp;controls=0&amp;start=117'), 
 ('FLOW', 'Estilo focado na variação do ritmo, da cadência e da entrega das palavras.', 'https://www.youtube-nocookie.com/embed/fWWbOUZj7QI?si=YlIc9T0xZFMuAf2G&amp;controls=0&amp;start=343'), 
 ('DUPLA NORTE', 'Estilo focado na técnica de completar a rima da dupla.', 'https://www.youtube-nocookie.com/embed/-l28J2-x6sg?si=a6_63sxQUNq2lavH&amp;controls=0&amp;start=97'), 
-('AGRESSIVO', 'Estilo focado no ataque direto ao oponente através de linhas impactantes e postura intimidadora.', 'https://www.youtube-nocookie.com/embed/cq2SSxJjeHU?si=2AgZVQC3d9GPQuMo&amp;controls=0&amp;start=292');
-
+('AGRESSIVO', 'Estilo focado no ataque direto ao oponente através de linhas impactantes e postura intimidadora.', 'https://www.youtube-nocookie.com/embed/cq2SSxJjeHU?si=2AgZVQC3d9GPQuMo&amp;controls=0&amp;start=292'),
+('MÉTRICA', 'Estilo focado na precisão matemática das sílabas, encaixando os versos perfeitamente no tempo da batida.', 'https://www.youtube-nocookie.com/embed/0z0sXnm46e0?si=oIQhBDKzbKepn7_D&amp;controls=0&amp;start=451');
 
 SELECT tempoPorPalavra FROM ModoTreino;
 
@@ -236,9 +236,10 @@ SELECT
 	DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
 	FROM usuario u
 	LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
-	WHERE DATE(rt.dt_hora) >= CURRENT_DATE - INTERVAl 7 DAY AND u.nome = 'lucas' 
+	WHERE u.nome = 'lucas' 
 	GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
-ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y');
+ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') DESC LIMIT 7
+;
 
 -- =====================================================================
 -- =========> todos os termos <=======
