@@ -96,7 +96,7 @@ INSERT INTO estilos (nome, descricao, url) VALUES
 
 SELECT tempoPorPalavra FROM ModoTreino;
 
-SELECT * FROM usuari3o;
+SELECT * FROM usuario;
 
 SELECT beaturl FROM BeatTreino WHERE nome = 'Lean Back';
 
