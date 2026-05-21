@@ -142,6 +142,7 @@
     </div>
   </footer>
 </body>
+  <script src="../js/Palavras_armezadas.js"></script>
   <script>
 
     async function ComecarTreino() {
@@ -153,30 +154,6 @@
       let BeatNome = slt_BeatDeTreino.value;
       let TempoDeTreino = slt_TempoDeTreino.value;
       let TempoTotal = 0;
-      let PalavrasAleatorias = [
-        "late", "abraço", "alegria", "amizade", "amor", 
-        "andar", "animal", "antigo", "anuência", "azul", 
-        "bacia", "balão", "banco", "barco", "beleza", 
-        "biscoito", "bloco", "bola", "bonito", "brisa", 
-        "cabelo", "caixa", "calor", "caminho", "caneta", 
-        "carinho", "carta", "casa", "celular", "chuva", 
-        "cidade", "cinema", "coelho", "comida", "coração", 
-        "coragem", "criança", "cultura", "dança", "dedo", 
-        "desenho", "dia", "dialogar", "dinheiro", "doce", 
-        "dormir", "eco", "energia", "escola", "espelho", 
-        "esporte", "estrela", "estudar", "família", "festa", 
-        "flor", "fogo", "forte", "fruta", "futuro", 
-        "gato", "girassol", "globo", "grama", "gritar", 
-        "história", "hoje", "horizonte", "humildade", "idéia", 
-        "ilha", "impacto", "infância", "internet", "irmão", 
-        "janela", "jardim", "jovem", "jogo", "junto", 
-        "lápis", "laranja", "leitura", "leve", "livro", 
-        "luz", "lua", "madrugada", "mãe", "mar", 
-        "meia", "menino", "mesa", "mistério", "mochila", 
-        "montanha", "música", "natureza", "navio", "nuvem"
-      ]
-
-
       
       let TempoParaTrocaDePalavra = 0;
       let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
@@ -237,8 +214,8 @@
 
       const timer = setInterval(() => {
         if (TempoTotal == TempoDeTreino) {
-          let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
-          let PalavraGerada = PalavrasAleatorias[NumAleatoria]
+          let NumAleatoria = Math.floor(Math.random() * (palavrasParaRimar.length));
+          let PalavraGerada = palavrasParaRimar[NumAleatoria]
           PalavraAleatoriaGerada.innerHTML = PalavraGerada;
           PalavrasPassadas.push(PalavraGerada);
           BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
@@ -279,9 +256,9 @@
       let i = 0;
       const timerPalavra = setInterval(() => {
         if(TempoDeTreino >= TempoParaTrocaDePalavra) {
-          while(i < PalavrasAleatorias.length) {
-            let NumAleatoria = Math.floor(Math.random() * (PalavrasAleatorias.length));
-            let PalavraGerada = PalavrasAleatorias[NumAleatoria];
+          while(i < palavrasParaRimar.length) {
+            let NumAleatoria = Math.floor(Math.random() * (palavrasParaRimar.length));
+            let PalavraGerada = palavrasParaRimar[NumAleatoria];
             
             if (!PalavrasPassadas.includes(PalavraGerada)) {
                 PalavrasPassadas.push(PalavraGerada);

@@ -1,1 +1,50 @@
 @import url('https://fonts.googleapis.com/css2?family=Datatype:wdth,wght@127.9,100..900&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
+body {
+    background-color: black;
+    color: white;
+}
+
+
+.SecaoSobreNos {
+    display: flex;
+    justify-content: center;
+    gap: 5%;
+    padding: 50px 50px 80px 50px;
+    border-bottom: 1px solid white;
+
+}
+
+.SecaoEsquerda {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 100px;
+}
+
+.SecaoDireita {
+    border: 1px solid white;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SecaoDireita img {
+    height: 70%;
+    width: 60%;
+    border-radius: 10px;
+}
+
+.box {
+    padding: 10px;
+    border-radius: 10px 10px 0 10px;
+    background-color: rgba(45, 45, 45, 0.5);
+    box-shadow: 3px 3px 3px 7px rgb(255, 255, 255);
+}
+
+.box {
+    font-size: 28px;
+}
+
