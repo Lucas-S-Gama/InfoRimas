@@ -211,6 +211,10 @@
       id_mp3.volume = 0.25;
 
       treinoDinamico.style.display = 'flex';
+      treinoDinamico.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end'
+      })
 
       const timer = setInterval(() => {
         if (TempoTotal == TempoDeTreino) {
@@ -224,6 +228,8 @@
           id_buttonComecar.innerHTML = 'Treinar denovo!';
           id_buttonComecar.disabled = false;
           id_mp3.pause();
+          id_TempoTotal.innerHTML = `##`;
+          PalavraAleatoriaGerada.innerHTML = `##`;
 
           fetch("/treino/RegistrarTreino", {
             method: "POST",

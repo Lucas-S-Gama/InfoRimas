@@ -118,7 +118,7 @@ function CaptarHistoricoSeteDiasUser(nome) {
             DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
             FROM usuario u
             LEFT JOIN RegistroTreino rt ON rt.fk_idUsuario = u.idUsuario
-            WHERE u.nome = 'lucas' 
+            WHERE u.nome = '${nome}' 
             GROUP BY u.nome, DATE_FORMAT(rt.dt_hora, '%d/%m/%Y')
         ORDER BY DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') DESC LIMIT 7
         ;

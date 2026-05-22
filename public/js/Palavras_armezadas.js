@@ -98,7 +98,7 @@ let palavrasParaRimar = [
   "cidade", "idade", "vaidade", "vontade", "verdade", "saudade", "liberdade", "amizade", "felicidade", "realidade",
   "qualidade", "unidade", "comunidade", "metade", "maldade", "bondade", "tempestade", "novidade", "atividade", "identidade",
   "luz", "cruz", "conduz", "produz", "seduz", "reluz", "jesus", "capuz", "avestruz", "azul",
-  "sul", "consul", "paul", "baúl", "mel", "papel", "anel", "painel", "pastel", "quartel",
+  "sul", "consul", "paul", "mel", "papel", "anel", "painel", "pastel", "quartel",
   "fiel", "cruel", "pinzel", "hotel", "troféu", "céu", "véu", "réu", "breu", "meu",
   "teu", "seu", "deus", "vias", "dias", "boas", "ruas", "luas", "suas", "tuas",
   "rio", "frio", "fio", "desafio", "navio", "vazio", "arrepio", "tio", "pavio", "sio",
