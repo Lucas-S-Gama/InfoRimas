@@ -111,3 +111,26 @@ body {
 .box a:hover {
     text-decoration: underline;
 }
+
+.div_aguardar {
+    position: absolute;
+    border: 1px solid black;
+    z-index: 999;
+    background-color: #D9D9D9;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+    border-radius: 10px;
+}
+
+.div_aguardar img {
+    width: 30%;
+}
+
+.div_aguardar p {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bolder;
+}

@@ -26,6 +26,10 @@
     </header>
     <div class="banner">
         <div class="box">
+            <div id="div_aguardar" class="div_aguardar">
+                <p>Logando...</p>
+                <img src="../assets/loader-barra.gif" id="loading-gif"/>
+            </div>
             <h1>LOGIN</h1>
             <div class="box-inputs">
                 <div class="campo">
@@ -40,9 +44,6 @@
             </div>
             <button id="botao_logar" onclick="logar()">LOGAR</button>
             <br>
-            <div id="div_aguardar" style="width: 50px; display: none;">
-                <img src="../assets/loader-barra.gif" id="loading-gif" style="width: 100%;"/>
-            </div>
             <p id="Mensage_erro" style="color: red; font-size: 15px; margin-bottom: 10px; background-color: black; padding: 10px; display: none;"></p>
             <a href="#">Esqueci a senha</a>
             <a href="cadastro.html">Não tenho conta cadastrada</a>
@@ -116,9 +117,7 @@
                         sessionStorage.EMAIL_USUARIO = json.email;
                         sessionStorage.NOME_USUARIO = json.nome;
                         sessionStorage.ID_USUARIO = json.idUsuario;
-                        
-                        MensagemDeErro('Logando...')
-                        
+                                                
                         setTimeout(function () {
                             window.location = "homeTecnicas.html";
                         }, 1000);
@@ -141,7 +140,6 @@
                 MensagemDeErro('E-mail ou senha incorretos.');
                 return false
             })
-            MensagemDeErro('E-mail ou senha incorretos.');
             cont += 1
             return false;
         }

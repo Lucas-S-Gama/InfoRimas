@@ -27,6 +27,10 @@
     </header>
         <div class="banner">
         <div class="box">
+            <div id="div_aguardar" class="div_aguardar">
+                <p>Redirecionando para o login...</p>
+                <img src="../assets/loader-barra.gif" id="loading-gif"/>
+            </div>
             <h1>CADASTRO</h1>
             <div class="box-inputs">
                 <div class="CamposNomeEmail">
@@ -91,15 +95,6 @@
         let senhaLet = ipt_senha.value
         let confirmSenhaLet = ipt_confirmarSenha.value
 
-        let NaoPodeTerNoNome = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '@', '#', '%', '!', '?', '(', ')']
-
-        for (let i = 0; i < NaoPodeTerNoNome.length; i++) {
-            if (nomeLet.includes(NaoPodeTerNoNome[i])) {
-                MensagemDeErro('Insira apenas letras no nome');
-                break;
-            }
-        }
-
         if(senhaLet !== confirmSenhaLet) {
             MensagemDeErro('As senhas não coincidem.');
             finalizarAguardar();
@@ -133,13 +128,10 @@
         console.log("resposta: ", resposta);
 
         if (resposta.ok) {
-            MensagemDeErro("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
-
           setTimeout(() => {
             window.location = "login.html";
           }, "2000");
 
-            finalizarAguardar();
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
