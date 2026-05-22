@@ -37,7 +37,7 @@ body {
 }
 
 .BoxKpi h1 {
-    font-size: 30px;
+    font-size: 35px;
     padding: 0 10px 0 10px;
 }
 
@@ -57,6 +57,11 @@ body {
     text-align: center;
 }
 
+.BoxKpi .descricoes p b {
+    color: #DB2602;
+    text-decoration: underline;
+}
+
 .PrimeiraSecaoDireita {
     width: 35%;
     padding-left: 10px;
@@ -64,8 +69,8 @@ body {
 
 .PrimeiraSecaoDireita h1 {
     text-align: center;
-    font-size: 30px;
-    margin-bottom: 40px;
+    font-size: 35px;
+    margin-bottom: 30px;
 }
 
 .usuariosRanks {
@@ -90,6 +95,7 @@ body {
 .BoxUsuarios p {
     padding-left: 10px;
     font-size: 25px;
+    font-weight: bold;
 }
 
 #PrimeiroLugar {
