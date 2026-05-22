@@ -82,13 +82,20 @@
         <p>Instrumental de músicas</p>
       </div>
     </section>
-    <section class="font_barlow secao_button">
+    <section class="secao_button">
       <button id="id_buttonComecar" onclick="ComecarTreino()">Começar treino!</button>
     </section>
     <div id="div_aguardar" style="width: 250px; display: none; justify-self: center;">
         <img src="../assets/loader-bola.gif" id="loading-gif" style="width: 100%;"/>
     </div>
-    <section class="font_barlow secao_treinoDinamico" id="id_secao_treinoDinamico">
+    <section class="secao_treinoDinamico" id="id_secao_treinoDinamico">
+      <div class="MensagemRegistro" id="MensagemRegistro">
+        <div class="ConteudoMensagemErro">
+          <h1>Finalizado!</h1>
+          <p>Seu treino foi registrado com sucesso!</p>
+          <button onclick="FecharMensagemDeErro()">Fechar</button>
+        </div>
+      </div>
       <div class="esquerda_treinoDinamico">
         <div class="descricao_treino">
           <p id="id_DescricaoDoModo"></p>
@@ -245,6 +252,8 @@
           }).then(function (resposta) {
             if (!resposta.ok) {
               throw "Houve um erro ao tentar realizar o registro do treino!";
+            } else {
+              MensagemRegistro.style.display = 'flex'
             }
           })
           .catch(function (resposta) {
@@ -277,6 +286,11 @@
           }
         }
       }, (TempoParaTrocaDePalavra * 1000));
+    }
+
+
+    function FecharMensagemDeErro() {
+      MensagemRegistro.style.display = 'none';
     }
   </script>
 </html>
