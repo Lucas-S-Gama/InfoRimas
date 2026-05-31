@@ -93,8 +93,8 @@ body {
     flex-direction: column;
     align-items: center;
     padding-top: 60px;
-    padding-bottom: 60px;
-    gap: 40px;
+    padding-bottom: 30px;
+    /* gap: 40px; */
 }
 
 .Objetivo h1 {
@@ -105,13 +105,115 @@ body {
     color: #FFFFFF;
 }
 
-.Objetivo p {
-    font-size: 30px;
-    text-align: justify;
-    width: 60%;
+.subSecao_conteudoDoSite {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    align-items: center;
+    padding-bottom: 50px;
 }
 
-.Objetivo a {
+.subtitulos_subsecoes {
+    font-size: 55px;
+    color: white;
+    padding: 0 0 40px 0;
+    font-weight: bolder;
+}
+
+.subSecao_conteudoDoSite .container_box_subSecao {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.box_subSecaoConteudo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 30%;
+    height: 300px;
+}
+
+.box_subSecaoConteudo img {
+    width: 70%;
+    height: 80%;
+    filter: drop-shadow(20px 20px 4px rgba(0, 0, 0, 0.5));
+}
+
+.box_subSecaoConteudo p {
+    font-size: 30px;
+    font-weight: bold;
+    color: white;
+}
+
+
+.subSecao_treinoDoSite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: black;
+    padding-bottom: 60px;
+}
+
+.subSecao_treinoDoSite h2 {
+    padding-top: 50px;
+    padding-bottom: 80px;
+}
+
+.subSecao_treinoDoSite .TextoImg {
+    display: flex;
+    width: 90%;
+    justify-content: space-between;
+    height: 350px;
+}
+
+.subSecao_treinoDoSite .TextoImg p {
+    font-size: 42px;
+    width: 40%;
+    color: white;
+    text-align: justify;
+}
+
+.subSecao_treinoDoSite .TextoImg p span {
+    color: rgb(0, 255, 0);
+}
+
+.subSecao_treinoDoSite .TextoImg img {
+    box-shadow: 5px 5px 20px 10px rgb(4, 255, 0);
+}
+
+.CadastrarSecao {
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.CadastrarSecao h1{
+    padding-bottom: 30px;
+    animation-name: AnimacaoTituloDois;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+.CadastrarSecao h1 span {
+    animation-name: AnimacaoTitulo;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+
+.CadastrarSecao p {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: justify;
+    width: 60%;
+    padding-bottom: 50px;
+}
+
+.CadastrarSecao a {
     font-size: 30px;
     font-weight: bold;
     background-color: #332823;
@@ -126,7 +228,7 @@ body {
     transition: 0.5s;
 }
 
-.Objetivo a:hover {
+.CadastrarSecao a:hover {
     background-color: white;
     color: #DB2602;
     border-radius: 10px;
