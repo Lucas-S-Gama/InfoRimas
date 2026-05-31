@@ -39,7 +39,43 @@ function autenticar(req, res) {
                 }
             );
     }
+}
 
+function BuscarPorEmail(req, res) {
+    var email = req.body.emailServer;
+
+    if (email == undefined) {
+    res.status(400).send("Seu email está undefined!");
+    }
+
+    usuarioModel.BuscarPorEmail(email)
+        .then(
+            function(resultado) {
+                console.log(`\nResultados encontrados: ${resultado.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultado)}`); // transforma JSON em String
+
+                if (resultado.length == 0) {
+                    console.log(resultado);
+                    res.json({
+                        TemUsuario: false,
+                    });
+
+                } else if (resultado.length > 0) {
+                    console.log(resultado);
+                    res.json({
+                        TemUsuario: true,
+                    });
+                }
+            }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log(
+                    "\nErro no cadastro busca por email",
+                    erro.sqlMessage
+                );
+                res.status(500).json(erro.sqlMessage);
+            }
+        )
 }
 
 function cadastrar(req, res) {
@@ -77,5 +113,6 @@ function cadastrar(req, res) {
 
 module.exports = {
     autenticar,
+    BuscarPorEmail,
     cadastrar
 }

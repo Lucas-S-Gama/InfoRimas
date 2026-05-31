@@ -12,4 +12,8 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/BuscarPorEmail", function (req, res) {
+    usuarioController.BuscarPorEmail(req, res);
+});
+
 module.exports = router;
