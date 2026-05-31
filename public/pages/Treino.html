@@ -11,7 +11,7 @@
   
     <script src="../js/sessao.js"></script>
 </head>
-<body onload="validarSessao()">
+<body onload="validarSessao(), PegarInformacoes()">
     <header class="Header">
         <div class="header_esquerda">
             <img src="../assets/icon/LogoPreto.png" alt="LogoPreta">
@@ -57,27 +57,18 @@
       <div>
         <h1 class="selects_titulo">⬇SELECIONAR MODO⬇</h1>
         <select id="slt_ModoDeTreino">
-          <option value="Easy Mode">Easy</option>
-          <option value="Normal Mode">Normal</option>
-          <option value="Hard Mode">Hard</option>
         </select>
         <p>Quanto maior a dificuldade, mais palavras aparecem</p>
       </div>
       <div>
         <h1 class="selects_titulo">⬇SELECIONAR TEMPO⬇</h1>
         <select id="slt_TempoDeTreino">
-          <option value="30">30s</option>
-          <option value="45">45s</option>
-          <option value="60">60s</option>
         </select>
         <p>Tempo total do treino</p>
       </div>
       <div>
         <h1 class="selects_titulo">⬇SELECIONAR BEAT⬇</h1>
         <select id="slt_BeatDeTreino">
-          <option value="Lean Back">Lean Back</option>
-          <option value="Barras e Barras">Barras e Barras</option>
-          <option value="Boom">Boom</option>
         </select>
         <p>Instrumental de músicas</p>
       </div>
@@ -94,6 +85,12 @@
           <h1>Finalizado!</h1>
           <p>Seu treino foi registrado com sucesso!</p>
           <button onclick="FecharMensagemDeErro()">Fechar</button>
+        </div>
+      </div>
+      <div class="MensagemRegistro" id="MensagemContagemRegressiva">
+        <div class="ConteudoMensagemErro">
+          <h1>COMEÇANDO!</h1>
+          <p id="ContadorParaComecar"></p>
         </div>
       </div>
       <div class="esquerda_treinoDinamico">
@@ -151,17 +148,69 @@
 </body>
   <script src="../js/Palavras_armezadas.js"></script>
   <script>
+    let MusicasDB = [];
+    let ModoTreinoDB = [];
+    let TemposDB = [];
+
+    async function PegarInformacoes() {
+
+      await fetch(`/treino/PegarMusicas`, { cache: 'no-store'}).then(function (resposta) {
+        if(resposta.ok) {
+          resposta.json().then(function (resposta) {
+            for (let i = 0; i < resposta.length; i++) {
+              slt_BeatDeTreino.innerHTML += `
+                <option value="${resposta[i].idBeatTreino}">${resposta[i].nome}</option>
+              `
+              MusicasDB.push(resposta[i])
+            }
+          })
+        } else {
+          return console.log('API error');
+        }
+      });
+
+      await fetch(`/treino/PegarModoTreino`, {cache: 'no-store'}).then(function (resposta) {
+        if(resposta.ok) {
+          resposta.json().then(function (resposta) {
+            for (let i = 0; i < resposta.length; i++) {
+              slt_ModoDeTreino.innerHTML += `
+                <option value="${resposta[i].idModoTreino}">${resposta[i].nome}</option>
+              `
+              ModoTreinoDB.push(resposta[i]);
+            }
+          });
+        } else {
+          return console.log('API error');
+        }
+      });
+
+      await fetch(`/treino/PegarTempos`, {cache: 'no-store'}).then(function (resposta) {
+        if(resposta.ok) {
+          resposta.json().then(function (resposta) {
+            for (let i = 0; i < resposta.length; i++) {
+              slt_TempoDeTreino.innerHTML += `
+                <option value="${resposta[i].idTempoTreino}">${resposta[i].tempo_segundos}s</option>
+              `
+              TemposDB.push(resposta[i]);
+            } 
+          })
+        } else {
+            return console.log('API error')
+        }
+      })
+
+    }
 
     async function ComecarTreino() {
       BoxPalavrasPassadas.innerHTML = '';
       id_buttonComecar.disabled = true;
       aguardar();
       
-      let ModoNome = slt_ModoDeTreino.value;
-      let BeatNome = slt_BeatDeTreino.value;
-      let TempoDeTreino = slt_TempoDeTreino.value;
+      let ModoValue= slt_ModoDeTreino.value;
+      let BeatValue = slt_BeatDeTreino.value;
+      let TempoDeTreinoValue = slt_TempoDeTreino.value;
       let TempoTotal = 0;
-      
+      let ContRegressiva = 5;
       let TempoParaTrocaDePalavra = 0;
       let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
       let PalavrasPassadas = [];
@@ -173,64 +222,70 @@
         "idBeatTreino": ''
       }]
 
-      await fetch(`/treino/PegarURLMusica/${BeatNome}`, { cache: 'no-store'}).then(function (resposta) {
-        if(resposta.ok) {
-          resposta.json().then(function (resposta) {
-            let url = resposta[0].beaturl;
-            id_mp3.src = `../assets/beats/${resposta[0].beaturl}.mp3`;
-            credenciaisRegistros[0].idBeatTreino = resposta[0].idBeatTreino;
-          })
-        } else {
-          return console.log('API error');
-        }
-      });
+      for (let i = 0; i < MusicasDB.length; i++) {
+          if(MusicasDB[i].idBeatTreino == BeatValue) {
+            credenciaisRegistros[0].idBeatTreino = MusicasDB[i].idBeatTreino;
+            id_mp3.src = `../assets/beats/${MusicasDB[i].beaturl}.mp3`;
+            break;
+          }
+      }
 
-      await fetch(`/treino/ListarInfosModoTreino/${ModoNome}`, {cache: 'no-store'}).then(function (resposta) {
-        if(resposta.ok) {
-          resposta.json().then(function (resposta) {
-            let descricao = resposta[0].descricao;
-            let nomeModo = resposta[0].nome;
-            id_DescricaoDoModo.innerHTML = `${descricao}`;
-            id_ModoSelecionado.innerHTML = `${nomeModo}`;
-            TempoParaTrocaDePalavra = resposta[0].tempoPorPalavra;
-            credenciaisRegistros[0].idModoTreino = resposta[0].idModoTreino;
-          });
-        } else {
-          return console.log('API error');
-        }
-      })
+      for (let i = 0; i < ModoTreinoDB.length; i++) {
+          if(ModoTreinoDB[i].idModoTreino == ModoValue) {
+            id_DescricaoDoModo.innerHTML = `${ModoTreinoDB[i].descricao}`;
+            id_ModoSelecionado.innerHTML = `${ModoTreinoDB[i].nome}`;
+            TempoParaTrocaDePalavra = ModoTreinoDB[i].tempoPorPalavra;
+            credenciaisRegistros[0].idModoTreino = ModoTreinoDB[i].idModoTreino;
+            break;
+          }
+      }
 
-      await fetch(`/treino/PegarTempoTreino/${TempoDeTreino}`, {cache: 'no-store'}).then(function (resposta) {
-        if(resposta.ok) {
-          resposta.json().then(function (resposta) {
-            TempoTotal = resposta[0].tempo_segundos;
-            TempoDeTreino = resposta[0].tempo_segundos;
-            id_TempoTotal.innerHTML = `${TempoDeTreino}` ;
-            credenciaisRegistros[0].idTempoTreino = resposta[0].idTempoTreino;   
-          })
-        } else {
-            return console.log('API error')
-        }
-      })
+      for (let i = 0; i < TemposDB.length; i++) {
+          if(TemposDB[i].idTempoTreino == TempoDeTreinoValue) {
+            TempoTotal = TemposDB[i].tempo_segundos;
+            TempoDeTreino = TemposDB[i].tempo_segundos;
+            id_TempoTotal.innerHTML = `${TempoTotal}`;
+            credenciaisRegistros[0].idTempoTreino = TemposDB[i].idTempoTreino;
+            break;
+          }
+      }
       finalizarAguardar();
 
       id_mp3.play();
-      id_mp3.volume = 0.75;
-
+      id_mp3.volume = 0.05;
       treinoDinamico.style.display = 'flex';
+      MensagemContagemRegressiva.style.display = 'flex';
+      ContadorParaComecar.innerHTML = `5`;
+      
       treinoDinamico.scrollIntoView({
         behavior: 'smooth',
         block: 'end'
       })
 
+      function PlotarContagemRegressiva (cont) {
+        if (cont <= 3) {
+          ContadorParaComecar.innerHTML = `<span style="color: red">${cont}</span>`;
+        } else {
+          ContadorParaComecar.innerHTML = `${cont}`;
+        }
+      }
+
       const timer = setInterval(() => {
-        if (TempoTotal == TempoDeTreino) {
+        if (ContRegressiva > 0) {
+          PlotarContagemRegressiva(ContRegressiva)
+          ContRegressiva--;
+          id_mp3.volume  += 0.14;
+          return;
+        } else if (ContRegressiva == 0) {
           let NumAleatoria = Math.floor(Math.random() * (palavrasParaRimar.length));
           let PalavraGerada = palavrasParaRimar[NumAleatoria]
           PalavraAleatoriaGerada.innerHTML = PalavraGerada;
           PalavrasPassadas.push(PalavraGerada);
-          BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`          
+          BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`
+          MensagemContagemRegressiva.style.display = 'none';
+          ContRegressiva--
         }
+        
         if (TempoDeTreino <= 0) {
           id_buttonComecar.innerHTML = 'Treinar denovo!';
           id_buttonComecar.disabled = false;
@@ -269,25 +324,26 @@
       }, 1000)
 
       let i = 0;
-      const timerPalavra = setInterval(() => {
-        if(TempoDeTreino >= TempoParaTrocaDePalavra) {
-          while(i < palavrasParaRimar.length) {
-            let NumAleatoria = Math.floor(Math.random() * (palavrasParaRimar.length));
-            let PalavraGerada = palavrasParaRimar[NumAleatoria];
-            
-            if (!PalavrasPassadas.includes(PalavraGerada)) {
-                PalavrasPassadas.push(PalavraGerada);
-                PalavraAleatoriaGerada.innerHTML = PalavraGerada;
-                BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`;          
-                return;
-            };
+      setTimeout(() => {
+        const timerPalavra = setInterval(() => {
+          if(TempoDeTreino >= TempoParaTrocaDePalavra) {
+            while(i < palavrasParaRimar.length) {
+              let NumAleatoria = Math.floor(Math.random() * (palavrasParaRimar.length));
+              let PalavraGerada = palavrasParaRimar[NumAleatoria];
+              
+              if (!PalavrasPassadas.includes(PalavraGerada)) {
+                  PalavrasPassadas.push(PalavraGerada);
+                  PalavraAleatoriaGerada.innerHTML = PalavraGerada;
+                  BoxPalavrasPassadas.innerHTML += `${PalavraGerada} <br>`;          
+                  return;
+              };
 
-            i++;
+              i++;
+            }
           }
-        }
-      }, (TempoParaTrocaDePalavra * 1000));
+        }, (TempoParaTrocaDePalavra * 1000));
+      }, 5000);
     }
-
 
     function FecharMensagemDeErro() {
       MensagemRegistro.style.display = 'none';

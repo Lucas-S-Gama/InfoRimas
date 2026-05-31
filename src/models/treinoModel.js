@@ -9,25 +9,25 @@ function RegistrarTreino(fk_idUsuario, fk_ModoTreino, fk_TempoTreino, fk_BeatTre
     return database.executar(instrucao);
 }
 
-function PegarURLMusica(BeatNome) {
+function PegarMusicas() {
     var instrucao = `
-        SELECT idBeatTreino, beaturl FROM BeatTreino WHERE nome = '${BeatNome}'
+        SELECT * FROM BeatTreino;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function ListarInfosModoTreino(ModoNome) {
+function PegarModoTreino() {
     var instrucao = `
-        SELECT idModoTreino, nome, descricao, tempoPorPalavra FROM ModoTreino WHERE nome = '${ModoNome}';
+        SELECT * FROM ModoTreino;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 }
 
-function PegarTempoTreino(TempoDeTreino) {
+function PegarTempos() {
     var instrucao = `
-        SELECT idTempoTreino, tempo_segundos FROM TempoTreino WHERE tempo_segundos = ${TempoDeTreino};
+        SELECT * FROM TempoTreino;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -35,7 +35,7 @@ function PegarTempoTreino(TempoDeTreino) {
 
 module.exports = {
     RegistrarTreino,
-    PegarURLMusica,
-    ListarInfosModoTreino,
-    PegarTempoTreino
+    PegarMusicas,
+    PegarModoTreino,
+    PegarTempos
 };

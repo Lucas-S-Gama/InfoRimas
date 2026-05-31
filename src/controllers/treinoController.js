@@ -17,10 +17,8 @@ function RegistrarTreino(req, res) {
     })
 }
 
-function PegarURLMusica(req, res) {
-    var BeatNome = req.params.BeatNome;
-
-    treinoModel.PegarURLMusica(BeatNome).then(function(resultado){
+function PegarMusicas(req, res) {
+    treinoModel.PegarMusicas().then(function(resultado){
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -33,10 +31,8 @@ function PegarURLMusica(req, res) {
     });
 }
 
-function ListarInfosModoTreino(req, res) {
-    var ModoNome = req.params.ModoNome;
-
-    treinoModel.ListarInfosModoTreino(ModoNome).then(function(resultado){
+function PegarModoTreino(req, res) {
+    treinoModel.PegarModoTreino().then(function(resultado){
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -49,10 +45,8 @@ function ListarInfosModoTreino(req, res) {
     })
 }
 
-function PegarTempoTreino(req, res) {
-    var TempoDeTreino = req.params.TempoDeTreino;
-
-    treinoModel.PegarTempoTreino(TempoDeTreino).then(function(resultado){
+function PegarTempos(req, res) {
+    treinoModel.PegarTempos().then(function(resultado){
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -65,9 +59,12 @@ function PegarTempoTreino(req, res) {
     })
 }
 
+
+
+
 module.exports = {
     RegistrarTreino,
-    PegarURLMusica,
-    ListarInfosModoTreino,
-    PegarTempoTreino
+    PegarMusicas,
+    PegarModoTreino,
+    PegarTempos
 };

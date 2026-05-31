@@ -136,14 +136,28 @@ body {
     gap: 20px;
 }
 
+#MensagemContagemRegressiva .ConteudoMensagemErro {
+    width: 50%;
+    height: 70%;
+}
+
 .ConteudoMensagemErro h1 {
     color: black;
     font-size: 50px;
 }
 
+#MensagemContagemRegressiva .ConteudoMensagemErro h1 {
+    font-size: 70px;
+}
+
 .ConteudoMensagemErro p {
     font-size: 30px;
     color: black;
+}
+
+#ContadorParaComecar {
+    font-size: 150px;
+    font-weight: bolder;
 }
 
 .ConteudoMensagemErro button {

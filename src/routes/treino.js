@@ -7,16 +7,16 @@ router.post("/RegistrarTreino", function (req, res) {
     treinoController.RegistrarTreino(req, res);
 });
 
-router.get("/PegarURLMusica/:BeatNome", function(req, res) {
-    treinoController.PegarURLMusica(req, res);
+router.get("/PegarMusicas", function(req, res) {
+    treinoController.PegarMusicas(req, res);
 });
 
-router.get("/ListarInfosModoTreino/:ModoNome", function(req, res) {
-    treinoController.ListarInfosModoTreino(req, res)
+router.get("/PegarModoTreino", function(req, res) {
+    treinoController.PegarModoTreino(req, res)
 });
 
-router.get("/PegarTempoTreino/:TempoDeTreino", function(req, res) {
-    treinoController.PegarTempoTreino(req, res)
+router.get("/PegarTempos", function(req, res) {
+    treinoController.PegarTempos(req, res)
 });
 
 
