@@ -113,7 +113,7 @@ function CaptarHistoricoSeteDiasUser(nome) {
         console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente.")
         var instrucaoSql = `
         SELECT
-            COUNT(u.idUsuario) AS QuantidadeDeTreinosPorDia,
+            COUNT(rt.fk_idUsuario) AS QuantidadeDeTreinosPorDia,
             u.nome AS nome,
             DATE_FORMAT(rt.dt_hora, '%d/%m/%Y') AS DataRealizadoTreinos
             FROM usuario u

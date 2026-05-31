@@ -28,6 +28,9 @@
     <div id="div_aguardar" style="width: 250px; display: none; justify-self: center;">
         <img src="../assets/loader-bola.gif" id="loading-gif" style="width: 100%;"/>
     </div>
+    <div class="tituloSecaoGlobal">
+        <h1>ESTATÍSTICAS GLOBAIS</h1>
+    </div>
     <section class="PrimeiraSecao" id="PrimeiraSecao">
         <div class="PrimeiraSecaoEsquerda">
             <div class="BoxKpi">
@@ -57,7 +60,8 @@
         </div>
     </section>
     <section class="graficosUsuario">
-        <h1>Quantidade de treinos nos ultimos dias treinados <span id="MostrarNomeUsuario"></span></h1>
+        <h1>ESTATÍSTICAS PESSOAIS - <span id="MostrarNomeUsuario"></span></h1>
+        <h1>Quantidade de treinos nos ultimos dias treinados</h1>
         <div id="div_Grafico">
             <canvas id="ipt_graficoFrequencia"></canvas>
             <p id="SemTreinoMensagem"></p>
@@ -88,7 +92,7 @@
     <script>
 
         let nome_do_usuario = sessionStorage.NOME_USUARIO;
-        MostrarNomeUsuario.innerHTML = `(${nome_do_usuario})`;
+        MostrarNomeUsuario.innerHTML = `${nome_do_usuario}`;
         
         async function CarregarInfos() {
             aguardar();
@@ -177,10 +181,10 @@
                     const DadosQuantidade= [];
                     let VerificadoEspacoBranco = false;
 
-                    if (resposta.length < 1) {
+                    if (resposta.length <= 1 && resposta[0].QuantidadeDeTreinosPorDia == 0) {
                         ipt_graficoFrequencia.style.display = 'none';
                         div_Grafico.style.height = '100px'
-                        SemTreinoMensagem.innerHTML = 'NENHUM TREINO REGISTRADOS NESSA CONTA'
+                        SemTreinoMensagem.innerHTML = 'NENHUM TREINO REGISTRADO NESSA CONTA'
                         return;
                     }
 
