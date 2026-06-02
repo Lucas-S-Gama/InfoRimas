@@ -63,11 +63,11 @@ descricao VARCHAR(200)
 );
 
 INSERT INTO termos (nome, descricao) VALUES
-('DROP NO BEAT', 'É o momento onde o beat vira. Foi a maior tendência em 2023, popularizado pelo Brennuz.'),
+('DROP NO BEAT', 'É o momento em que a batida principal da música entra com impacto total após uma contagem ou suspense.'),
 ('MVP', 'Most Valuable Player. MC que mais se destacou ou teve o melhor desempenho em um evento ou batalha.'),
 ('PUNCHLINE', 'A linha de impacto no final de uma rima que causa forte reação do público e pontua contra o oponente.'),
 ('DECORADA', 'Rima que já estava pronta ou decorada pelo MC antes da batalha, em vez de ser feita na hora.'),
-('TWOLALA', 'Resultado da batalha quando um dos MCs ganha de 2 a 0 contra outro MC'),
+('TWOLALA', 'Resultado da batalha quando um dos MCs ganha de 2 a 0 contra outro MC.'),
 ('FREESTYLE', 'Estilo livre. A arte de rimar de forma totalmente improvisada no momento exato em que a batida toca.'),
 ('DOBRA', 'Técnica de encaixar duas palavras ou sílabas tônicas no mesmo compasso para acelerar ou variar o fluxo.'),
 ('FLOW', 'A maneira como o MC flui na batida, combinando o ritmo das palavras com a cadência do instrumental.'),
