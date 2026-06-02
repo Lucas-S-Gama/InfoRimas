@@ -213,6 +213,7 @@
       let BeatValue = slt_BeatDeTreino.value;
       let TempoDeTreinoValue = slt_TempoDeTreino.value;
       let TempoTotal = 0;
+      let TempoDeTreino = 0;
       let ContRegressiva = 5;
       let TempoParaTrocaDePalavra = 0;
       let treinoDinamico = document.getElementById('id_secao_treinoDinamico');
@@ -290,7 +291,7 @@
         }
         
         if (TempoDeTreino <= 0) {
-          id_buttonComecar.innerHTML = 'Treinar denovo!';
+          id_buttonComecar.innerHTML = 'Treinar de novo!';
           id_buttonComecar.disabled = false;
           id_mp3.pause();
           id_TempoTotal.innerHTML = `##`;
@@ -327,8 +328,11 @@
       }, 1000)
 
       let i = 0;
+      // Esperando a contagem regressiva
       setTimeout(() => {
+        // Trocando as palavras conforme o tempo
         const timerPalavra = setInterval(() => {
+          // Verifica se é válido trocar as palavras
           if(TempoDeTreino >= TempoParaTrocaDePalavra) {
             while(i < palavrasParaRimar.length) {
               let NumAleatoria = Math.floor(Math.random() * (palavrasParaRimar.length));
@@ -343,6 +347,8 @@
 
               i++;
             }
+          } else {
+            clearInterval(timerPalavra)
           }
         }, (TempoParaTrocaDePalavra * 1000));
       }, 5000);

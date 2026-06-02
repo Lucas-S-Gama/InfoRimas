@@ -86,13 +86,13 @@ url VARCHAR(200)
 );
 
 INSERT INTO estilos (nome, descricao, url) VALUES 
-('SPEEDFLOW', 'Estilo focado na velocidade máxima da entrega das palavras dentro do ritmo.', 'https://www.youtube-nocookie.com/embed/D644IdO584s?si=mruhXUKiPkrXfrGQ&amp;controls=0&amp;start=136'), 
-('DROP NO BEAT', 'Estilo que sincroniza o ápice da rima com a virada ou queda da batida.', 'https://www.youtube-nocookie.com/embed/e8nSBGE7eo8?si=vv8aTZJMEWiYxHas&amp;controls=0&amp;start=310'), 
-('100% FREESTYLE', 'Estilo de improvisação pura e imediata, sem nenhuma estrutura pré-pensada.', 'https://www.youtube-nocookie.com/embed/fpoUiMB4Znk?si=yea0WMdeo_61YNmM&amp;controls=0&amp;start=117'), 
-('FLOW', 'Estilo focado na variação do ritmo, da cadência e da entrega das palavras.', 'https://www.youtube-nocookie.com/embed/fWWbOUZj7QI?si=YlIc9T0xZFMuAf2G&amp;controls=0&amp;start=343'), 
-('DUPLA NORTE', 'Estilo focado na técnica de completar a rima da dupla.', 'https://www.youtube-nocookie.com/embed/-l28J2-x6sg?si=a6_63sxQUNq2lavH&amp;controls=0&amp;start=97'), 
-('AGRESSIVO', 'Estilo focado no ataque direto ao oponente através de linhas impactantes e postura intimidadora.', 'https://www.youtube-nocookie.com/embed/cq2SSxJjeHU?si=2AgZVQC3d9GPQuMo&amp;controls=0&amp;start=292'),
-('MÉTRICA', 'Estilo focado na precisão matemática das sílabas, encaixando os versos perfeitamente no tempo da batida.', 'https://www.youtube-nocookie.com/embed/0z0sXnm46e0?si=oIQhBDKzbKepn7_D&amp;controls=0&amp;start=451');
+('SPEEDFLOW', 'Estilo focado na velocidade máxima da entrega das palavras dentro do ritmo.', 'https://www.youtube.com/embed/D644IdO584s?si=lza3R6fXk_H_77xe&amp;start=136'), 
+('DROP NO BEAT', 'Estilo que sincroniza o ápice da rima com a virada ou queda da batida.', 'https://www.youtube.com/embed/e8nSBGE7eo8?si=QL2QOa2L99rz7FoI&amp;start=310'), 
+('100% FREESTYLE', 'Estilo de improvisação pura e imediata, sem nenhuma estrutura pré-pensada.', 'https://www.youtube.com/embed/fpoUiMB4Znk?si=9c_c-7Et_l44hWii&amp;start=117'), 
+('FLOW', 'Estilo focado na variação do ritmo, da cadência e da entrega das palavras.', 'https://www.youtube.com/embed/fWWbOUZj7QI?si=8eb_eDv_zrPf4eWR&amp;start=343'),
+('DUPLA NORTE', 'Estilo focado na técnica de completar a rima da dupla.', 'https://www.youtube.com/embed/-l28J2-x6sg?si=zHfICZEBEt5hHvpm&amp;start=97'), 
+('AGRESSIVO', 'Estilo focado no ataque direto ao oponente através de linhas impactantes e postura intimidadora.', 'https://www.youtube.com/embed/cq2SSxJjeHU?si=rZq2stHuYkfXj6iJ&amp;start=292'),
+('MÉTRICA', 'Estilo focado na precisão matemática das sílabas, encaixando os versos perfeitamente no tempo da batida.', 'https://www.youtube.com/embed/0z0sXnm46e0?si=u-RXD2SCxrYJs8eW&amp;start=451');
 
 SELECT tempoPorPalavra FROM ModoTreino;
 
